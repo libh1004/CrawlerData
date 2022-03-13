@@ -14,6 +14,6 @@ namespace CrawlerDataProject.Controllers
         {
             return View(db.Accounts.ToList());
         }
-        
+        public 
     }
 }

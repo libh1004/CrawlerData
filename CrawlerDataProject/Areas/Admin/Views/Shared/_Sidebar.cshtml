@@ -1,0 +1,28 @@
+﻿
+<nav id="sidebar" class="sidebar js-sidebar">
+    <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" href="index.html">
+            <span class="align-middle">AdminKit</span>
+        </a>
+        <ul class="sidebar-nav">
+            <li class="sidebar-item">
+                @Html.ActionLink("Sources", "Index", "Source", new { @class = "sidebar-link" })
+
+            </li>
+            <li class="sidebar-item">     
+                @Html.ActionLink("Categories", "Index", "Category",new {@class="sidebar-link" })
+          
+            </li>
+            <li class="sidebar-item">
+                @Html.ActionLink("Articles", "Index", "Article", new { @class = "sidebar-link" })
+
+            </li>
+            <li class="sidebar-item">
+                @Html.ActionLink("Users", "Index", "User", new { @class = "sidebar-link" })
+
+            </li>
+            <li class="sidebar-item">
+                @Html.ActionLink("Feedbacks", "Index", "Feedback", new { @class = "sidebar-link" })
+            </li>
+    </div>
+</nav>
