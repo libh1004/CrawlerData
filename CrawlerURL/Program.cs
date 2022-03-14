@@ -37,16 +37,28 @@ namespace CrawlerURL
             IJobDetail job = JobBuilder.Create<HelloJob>()
                 .WithIdentity("myjob1", "group1")
                 .Build();
+
+            //ITrigger trigger = TriggerBuilder.Create()
+            //    .WithIdentity("trigger1", "group1")
+            //    .StartNow()
+            //    .WithSimpleSchedule(x => x
+            //        .WithIntervalInSeconds(2)
+            //        .RepeatForever())
+            //    .Build();
+            //sche.ScheduleJob(job, trigger);
+       
             ITrigger trigger = TriggerBuilder.Create()
                 .WithIdentity("mytrigger1", "group1")
-                .StartNow()
-                .WithSimpleSchedule(x => x
-                    .WithIntervalInSeconds(10)
-                    .RepeatForever())
+                .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(20, 41))
+                .ForJob(job)
                 .Build();
-            //sche.
-            await Task.Delay(TimeSpan.FromSeconds(5));
-            await sche.Shutdown();
+            //ITrigger trigger = TriggerBuilder.Create()
+            //    .WithIdentity("trigger2", "group1")
+            //    .WithCronSchedule("0 0/2 * * * ?")
+            //    .ForJob("myjob1", "group1")
+            //    .Build();
+            sche.ScheduleJob(job, trigger);
+            Console.ReadLine();
         }
     }
 }

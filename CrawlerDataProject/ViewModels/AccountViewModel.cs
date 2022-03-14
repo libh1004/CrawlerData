@@ -12,6 +12,7 @@ namespace CrawlerDataProject.ViewModels
         [Required(ErrorMessage = "Please enter fullname")]
         public string Fullname { get; set; }
         [Required(ErrorMessage = "Please enter password")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required(ErrorMessage = "Please enter email")]
         [DataType(DataType.EmailAddress)]

@@ -11,12 +11,13 @@ namespace CrawlerURL
     {
         public async Task Execute(IJobExecutionContext context)
         {
-
-            JobKey key = context.JobDetail.Key;
-            JobDataMap dataMap = context.JobDetail.JobDataMap;
-            string jobSays = dataMap.GetString("jobSays");
-            float myFloatValue = dataMap.GetFloat("myFloatValue");
-            await Console.Error.WriteLineAsync("Instance " + key + " of HelloJob says: " + jobSays + ", and val is: " + myFloatValue);
+            //JobKey key = context.JobDetail.Key;
+            //JobDataMap datamap = context.JobDetail.JobDataMap;
+            //string jobSays = datamap.GetString("Hello world");
+            //float myFloatValue = datamap.GetFloat("4000");
+            //bool myBool = datamap.GetBoolean("true");
+            //await Console.Error.WriteLineAsync("Instance of " + key + ", jobSays " + jobSays + ", myFloatValue " + myFloatValue + ", myBool " + myBool);
+            await Console.Out.WriteLineAsync("Hello world");
         }
     }
 }
