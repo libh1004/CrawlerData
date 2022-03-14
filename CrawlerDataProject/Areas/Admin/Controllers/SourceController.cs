@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CrawlerDataProject.Controllers
+namespace CrawlerDataProject.Areas.Admin.Controllers
 {
     public class SourceController : Controller
     {
