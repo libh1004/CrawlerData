@@ -36,31 +36,61 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult Details(int accountId)
+        public ActionResult Details(int? id)
         {
-            var account = db.Accounts.Find(accountId);
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            Account account = db.Accounts.Find(id);
+            if (account == null)
+            {
+                return HttpNotFound();
+            }
             return View(account);
+           // var account = db.Accounts.Find(accountId);
+            //return View(account);
         }
         [HttpGet]
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            Account accountEdit = db.Accounts.Find(id);
+            if (accountEdit == null)
+            {
+                return HttpNotFound();
+            }
+            return View(accountEdit);
         }
         [HttpPost]
-        public ActionResult Edit(Account account, int accountId)
+        public ActionResult Edit(Account account)
         {
-            var acc = db.Accounts.Find(accountId);
-
+            db.Entry(account).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult Delete()
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            Account accountDelete = db.Accounts.Find(id);
+            if (accountDelete == null)
+            {
+                return HttpNotFound();
+            }
+            return View(accountDelete);
         }
-        public ActionResult Delete(int accountId)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
         {
-            var account = db.Accounts.Find(accountId);
+            var account = db.Accounts.Find(id);
             db.Accounts.Remove(account);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
