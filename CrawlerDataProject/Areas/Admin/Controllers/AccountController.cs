@@ -89,10 +89,12 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             return View(account);
         }
-        public ActionResult Delete(int accountId)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
         {
-            var account = db.Accounts.Find(accountId);
+            var account = db.Accounts.Find(id);
             db.Accounts.Remove(account);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
         public List<Account> Search(string keyword)
