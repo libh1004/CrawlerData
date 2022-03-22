@@ -51,6 +51,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.CssSelectors.1.0.2\lib\net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack.CssSelectors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.CssSelectors.1.0.2\lib\net45\HtmlAgilityPack.CssSelectors.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -142,11 +148,16 @@
     <Compile Include="Migrations\202203091809423_InitData.designer.cs">
       <DependentUpon>202203091809423_InitData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203171350571_InitDatabase.cs" />
+    <Compile Include="Migrations\202203171350571_InitDatabase.Designer.cs">
+      <DependentUpon>202203171350571_InitDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Models\Source.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
@@ -156,11 +167,113 @@
     <Compile Include="ViewModels\SourceViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Lib\css\app.css" />
+    <Content Include="Areas\Admin\Lib\img\avatars\avatar-2.jpg" />
+    <Content Include="Areas\Admin\Lib\img\avatars\avatar-3.jpg" />
+    <Content Include="Areas\Admin\Lib\img\avatars\avatar-4.jpg" />
+    <Content Include="Areas\Admin\Lib\img\avatars\avatar-5.jpg" />
+    <Content Include="Areas\Admin\Lib\img\avatars\avatar.jpg" />
+    <Content Include="Areas\Admin\Lib\img\icons\icon-48x48.png" />
+    <Content Include="Areas\Admin\Lib\img\photos\unsplash-1.jpg" />
+    <Content Include="Areas\Admin\Lib\img\photos\unsplash-2.jpg" />
+    <Content Include="Areas\Admin\Lib\img\photos\unsplash-3.jpg" />
+    <Content Include="Areas\Admin\Lib\js\app.js" />
+    <Content Include="Areas\Admin\Lib\js\app.js.LICENSE.txt" />
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\all.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\simple-line-icons.css" />
+    <Content Include="Content\css\slick.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\Simple-Line-Icons.svg" />
+    <Content Include="Content\fonts\slick.svg" />
+    <Content Include="Content\images\ads\ad-360.png" />
+    <Content Include="Content\images\ads\ad-750.png" />
+    <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\favicon.png" />
+    <Content Include="Content\images\insta\insta-1.jpg" />
+    <Content Include="Content\images\insta\insta-2.jpg" />
+    <Content Include="Content\images\insta\insta-3.jpg" />
+    <Content Include="Content\images\insta\insta-4.jpg" />
+    <Content Include="Content\images\insta\insta-5.jpg" />
+    <Content Include="Content\images\insta\insta-6.jpg" />
+    <Content Include="Content\images\logo.svg" />
+    <Content Include="Content\images\map-bg.png" />
+    <Content Include="Content\images\other\about.jpg" />
+    <Content Include="Content\images\other\author-sm.png" />
+    <Content Include="Content\images\other\avatar-about.png" />
+    <Content Include="Content\images\other\avatar-lg.png" />
+    <Content Include="Content\images\other\comment-1.png" />
+    <Content Include="Content\images\other\comment-2.png" />
+    <Content Include="Content\images\other\comment-3.png" />
+    <Content Include="Content\images\other\hero-2.jpg" />
+    <Content Include="Content\images\other\hero.jpg" />
+    <Content Include="Content\images\posts\editor-lg.jpg" />
+    <Content Include="Content\images\posts\editor-sm-1.jpg" />
+    <Content Include="Content\images\posts\editor-sm-2.jpg" />
+    <Content Include="Content\images\posts\editor-sm-3.jpg" />
+    <Content Include="Content\images\posts\editor-sm-4.jpg" />
+    <Content Include="Content\images\posts\featured-lg.jpg" />
+    <Content Include="Content\images\posts\featured-md-1.jpg" />
+    <Content Include="Content\images\posts\featured-md-2.jpg" />
+    <Content Include="Content\images\posts\featured-md-3.jpg" />
+    <Content Include="Content\images\posts\featured-md-4.jpg" />
+    <Content Include="Content\images\posts\featured-xl-1.jpg" />
+    <Content Include="Content\images\posts\featured-xl-2.jpg" />
+    <Content Include="Content\images\posts\inspiration-1.jpg" />
+    <Content Include="Content\images\posts\inspiration-2.jpg" />
+    <Content Include="Content\images\posts\inspiration-3.jpg" />
+    <Content Include="Content\images\posts\latest-sm-1.jpg" />
+    <Content Include="Content\images\posts\latest-sm-2.jpg" />
+    <Content Include="Content\images\posts\latest-sm-3.jpg" />
+    <Content Include="Content\images\posts\latest-sm-4.jpg" />
+    <Content Include="Content\images\posts\post-lg-1.jpg" />
+    <Content Include="Content\images\posts\post-lg-2.jpg" />
+    <Content Include="Content\images\posts\post-lg-3.jpg" />
+    <Content Include="Content\images\posts\post-lg-4.jpg" />
+    <Content Include="Content\images\posts\post-md-1.jpg" />
+    <Content Include="Content\images\posts\post-md-10.jpg" />
+    <Content Include="Content\images\posts\post-md-2.jpg" />
+    <Content Include="Content\images\posts\post-md-3.jpg" />
+    <Content Include="Content\images\posts\post-md-4.jpg" />
+    <Content Include="Content\images\posts\post-md-5.jpg" />
+    <Content Include="Content\images\posts\post-md-6.jpg" />
+    <Content Include="Content\images\posts\post-md-7.jpg" />
+    <Content Include="Content\images\posts\post-md-8.jpg" />
+    <Content Include="Content\images\posts\post-md-9.jpg" />
+    <Content Include="Content\images\posts\post-xl-1.jpg" />
+    <Content Include="Content\images\posts\post-xl-2.jpg" />
+    <Content Include="Content\images\posts\post-xl-3.jpg" />
+    <Content Include="Content\images\posts\post-xl-4.jpg" />
+    <Content Include="Content\images\posts\single-cover.jpg" />
+    <Content Include="Content\images\posts\single-sm-1.jpg" />
+    <Content Include="Content\images\posts\tabs-1.jpg" />
+    <Content Include="Content\images\posts\tabs-2.jpg" />
+    <Content Include="Content\images\posts\tabs-3.jpg" />
+    <Content Include="Content\images\posts\tabs-4.jpg" />
+    <Content Include="Content\images\posts\trending-lg-1.jpg" />
+    <Content Include="Content\images\posts\trending-lg-2.jpg" />
+    <Content Include="Content\images\posts\trending-sm-1.jpg" />
+    <Content Include="Content\images\posts\trending-sm-2.jpg" />
+    <Content Include="Content\images\posts\trending-sm-3.jpg" />
+    <Content Include="Content\images\posts\trending-sm-4.jpg" />
+    <Content Include="Content\images\wave.svg" />
+    <Content Include="Content\images\widgets\widget-carousel-1.jpg" />
+    <Content Include="Content\images\widgets\widget-carousel-2.jpg" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\custom.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.sticky-sidebar.min.js" />
+    <Content Include="Content\js\popper.min.js" />
+    <Content Include="Content\js\slick.min.js" />
+    <Content Include="Content\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\webfonts\fa-solid-900.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -181,6 +294,55 @@
     <Content Include="Areas\Admin\Views\Articles\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Articles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Articles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Profile.cshtml" />
+    <Content Include="Areas\Admin\Lib\css\app.css.map" />
+    <Content Include="Areas\Admin\Lib\fonts\.gitkeep" />
+    <Content Include="Areas\Admin\Lib\js\app.js.map" />
+    <Content Include="Areas\Admin\Views\Shared\_Content.cshtml" />
+    <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Content\css\sass\base.scss" />
+    <Content Include="Content\css\sass\buttons.scss" />
+    <Content Include="Content\css\sass\elements.scss" />
+    <Content Include="Content\css\sass\header.scss" />
+    <Content Include="Content\css\sass\helper.scss" />
+    <Content Include="Content\css\sass\main.scss" />
+    <Content Include="Content\css\sass\mixins.scss" />
+    <Content Include="Content\css\sass\responsive.scss" />
+    <Content Include="Content\css\sass\slick.scss" />
+    <Content Include="Content\css\style.css.map" />
+    <Content Include="Content\css\style.scss" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Content\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Content\fonts\Simple-Line-Icons.woff" />
+    <Content Include="Content\fonts\Simple-Line-Icons.woff2" />
+    <Content Include="Content\fonts\slick.eot" />
+    <Content Include="Content\fonts\slick.ttf" />
+    <Content Include="Content\fonts\slick.woff" />
+    <Content Include="Content\js\bootstrap.min.js.map" />
+    <Content Include="Content\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\webfonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Admin\Views\Source\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Source\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Source\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Source\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Source\GetArticle.cshtml" />
+    <Content Include="Areas\Admin\Views\Articles\GetArticle.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -201,12 +363,14 @@
     </Content>
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Sidebar.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -229,6 +393,19 @@
     <EmbeddedResource Include="Migrations\202203091809423_InitData.resx">
       <DependentUpon>202203091809423_InitData.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203171350571_InitDatabase.resx">
+      <DependentUpon>202203171350571_InitDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrawlerContent\CrawlerContent.csproj">
+      <Project>{e9ca8c63-6aca-4c70-a466-0e418a96ff56}</Project>
+      <Name>CrawlerContent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrawlerURL\CrawlerURL.csproj">
+      <Project>{7220b890-3789-4573-97fb-4c46cd703374}</Project>
+      <Name>CrawlerURL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

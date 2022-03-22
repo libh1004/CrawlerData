@@ -1,0 +1,227 @@
+﻿@model CrawlerDataProject.Models.Source
+
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .hidden-linh {
+        display: none
+    }
+</style>
+
+<div class="container-fluid p-0">
+
+    <div class="mb-3">
+        <h1 class="h3 d-inline align-middle">Thêm mới nguồn trang</h1>
+        <a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
+            Nhập các thông tin bên dưới
+        </a>
+    </div>
+    <div class="row" id="step1">
+        <div class="col-12 col-lg-12">
+            <form action="/" method="post" name="add-source">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Input</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3 form-group">
+                            <input type="text" name="soureName" class="form-control" placeholder="Tên nguồn trang">
+                        </div>
+                        <div class="mb-3 form-group">
+                            <input type="text" name="sourceLink" class="form-control" placeholder="Tên nguồn trang">
+                        </div>
+                        <div class="mb-3 form-group ">
+                            <input type="text" name="sourceSelector" class="form-control" placeholder="Selector link chi tiết">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="btnSubmit" value="Preview Link" class="btn btn-primary" />
+                            <input type="reset" value="Reset Form" class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row hidden-linh" id="step2">
+        <div class="col-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Danh sách link tìm được</h5>
+                </div>
+                <div class="card-body">
+                    <ul id="links">
+                    </ul>
+                    <div class="form-group">
+                        <input type="submit" name="btnSubmit" onclick="displayOnly('step3')" value="Bước tiếp theo" class="btn btn-primary" />
+                        <input type="reset" value="Quay lại" onclick="displayOnly('step1')" class="btn btn-secondary" />
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="row hidden-linh" id="step3">
+        <div class="col-12 col-lg-12">
+            <form action="/" method="post" name="add-article-selector">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Nhập selector cho bài viết chi tiết</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3 form-group">
+                            <input type="text" name="titleSelector" class="form-control" placeholder="Selector cho tiêu đề bài viết">
+                        </div>
+                        <div class="mb-3 form-group">
+                            <input type="text" name="descriptionSelector" class="form-control" placeholder="Selector cho mô tả bài viết">
+                        </div>
+                        <div class="mb-3 form-group">
+                            <input type="text" name="thumbnailSelector" class="form-control" placeholder="Selector cho ảnh đại diện bài viết">
+                        </div>
+                        <div class="mb-3 form-group">
+                            <input type="text" name="contentSelector" class="form-control" placeholder="Selector cho nội dung bài viết">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="btnSubmit" value="Preview Bài Viết" class="btn btn-primary" />
+                            <input type="reset" value="Quay lại" onclick="displayOnly('step2')" class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row hidden-linh" id="step4">
+        <div class="col-12 col-lg-12">
+            <form action="/" method="post" name="submit-source">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Preview bài viết chi tiết</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div id="article-title"></div>
+                            <div id="article-description"></div>
+                            <div id="article-thumbnail"></div>
+                            <div id="article-content"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="btnSubmit" value="Lưu nguồn" class="btn btn-primary" />
+                            <input type="reset" value="Quay lại" onclick="displayOnly('step3')" class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        let currentStep = 1;
+        let linkList = $('#links');
+        let step1 = $('#step1');
+        let step2 = $('#step2');
+        let step3 = $('#step3');
+        let step4 = $('#step4');
+        let linkDetail = '';
+        let mapStep = {
+            'step1': step1,
+            'step2': step2,
+            'step3': step3,
+            'step4': step4
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            $('form[name="add-source"] input[name="btnSubmit"]').click(handleSubmitForm);
+            $('form[name="add-article-selector"] input[name="btnSubmit"]').click(handleSubmitSelector);
+            $('form[name="submit-source"] input[name="btnSubmit"]').click(handleSaveSource);
+            
+        })
+
+        function displayOnly(stepName) {            
+            for (const [key, value] of Object.entries(mapStep)) {
+                mapStep[key].addClass('hidden-linh');
+            }          
+            if (mapStep[stepName]) {
+                mapStep[stepName].removeClass('hidden-linh');
+            }
+        }
+
+        function handleSubmitForm(event) {
+            event.preventDefault();
+            let sourceName = $('form[name="add-source"] input[name="soureName"]').val();
+            let sourceLink = $('form[name="add-source"] input[name="sourceLink"]').val();
+            let sourceSelector = $('form[name="add-source"] input[name="sourceSelector"]').val();
+            var sourceInformation = {
+                sourceName: sourceName,
+                sourceLink: sourceLink,
+                sourceSelector: sourceSelector
+            }            
+            getLinkDetailFromSourceLink(sourceLink, sourceSelector);            
+        }
+
+        function handleSubmitSelector(event) {
+            event.preventDefault();
+            let titleSelector = $('form[name="add-article-selector"] input[name="titleSelector"]').val();
+            let descriptionSelector = $('form[name="add-article-selector"] input[name="descriptionSelector"]').val();
+            let thumbnailSelector = $('form[name="add-article-selector"] input[name="thumbnailSelector"]').val();
+            let contentSelector = $('form[name="add-article-selector"] input[name="contentSelector"]').val();
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let dataJson = JSON.parse(xhr.responseText);
+                    $('#article-title').text(dataJson.title);
+                    $('#article-thumbnail').text(dataJson.thumbnail);
+                    $('#article-description').text(dataJson.description);
+                    $('#article-content').html(dataJson.content);
+                    displayOnly('step4');
+                }
+            }
+            xhr.open('GET', `/Admin/Source/GetArticleDetailFromSelector?linkDetail=${linkDetail}&titleSelector=${titleSelector}&descriptionSelector=${descriptionSelector}&thumbnailSelector=${thumbnailSelector}&contentSelector=${contentSelector}`, false);
+            xhr.send();
+        }
+
+        function handleSaveSource(event) {
+            event.preventDefault();
+            let sourceName = $('form[name="add-source"] input[name="soureName"]').val();
+            let sourceLink = $('form[name="add-source"] input[name="sourceLink"]').val();
+            let sourceSelector = $('form[name="add-source"] input[name="sourceSelector"]').val();
+            let titleSelector = $('form[name="add-article-selector"] input[name="titleSelector"]').val();
+            let descriptionSelector = $('form[name="add-article-selector"] input[name="descriptionSelector"]').val();
+            let thumbnailSelector = $('form[name="add-article-selector"] input[name="thumbnailSelector"]').val();
+            let contentSelector = $('form[name="add-article-selector"] input[name="contentSelector"]').val();
+            var objectToSend = {
+                sourceName: sourceName,
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    alert('Save source success!');
+                    window.location.reload();
+                }
+            }
+            xhr.open('POST', `/Admin/Source/Save`, false);
+            xhr.send(JSON.stringify(objectToSend));
+        }
+
+        /**Nhận tham số là link, trả về danh sách link theo selector*/
+        function getLinkDetailFromSourceLink(link, selector) {
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let dataJson = JSON.parse(xhr.responseText);
+                    console.log(dataJson.links);
+                    let htmlToAppend = '';
+                    if (dataJson.links.length > 0) {
+                        linkDetail = dataJson.links[0];
+                        for (var i = 0; i < dataJson.links.length; i++) {
+                            htmlToAppend += `<li>${dataJson.links[i]}</li>`
+                        }
+                        linkList.html(htmlToAppend);
+                    }                   
+                    displayOnly('step2');
+                }
+            }
+            xhr.open('GET', `/Admin/Source/GetLinkDetailFromSourceLink?link=${link}&selector=${selector}`, false);
+            xhr.send();
+        }
+    </script>
+}

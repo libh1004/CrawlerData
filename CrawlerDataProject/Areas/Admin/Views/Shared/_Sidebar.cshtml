@@ -7,22 +7,31 @@
         <ul class="sidebar-nav">
             <li class="sidebar-item">
                 @Html.ActionLink("Sources", "Index", "Source", new { @class = "sidebar-link" })
-
             </li>
-            <li class="sidebar-item">     
-                @Html.ActionLink("Categories", "Index", "Category",new {@class="sidebar-link" })
-          
+            <li class="sidebar-item">
+                @Html.ActionLink("Categories", "Index", "Category", new { @class = "sidebar-link" })
             </li>
             <li class="sidebar-item">
                 @Html.ActionLink("Articles", "Index", "Article", new { @class = "sidebar-link" })
-
             </li>
             <li class="sidebar-item">
                 @Html.ActionLink("Accounts", "Index", "Account", new { @class = "sidebar-link" })
-
             </li>
             <li class="sidebar-item">
                 @Html.ActionLink("Feedbacks", "Index", "Feedback", new { @class = "sidebar-link" })
             </li>
+            <li class="sidebar-item">
+                @Html.ActionLink("Register", "Register", "Account", new { @class = "sidebar-link" })
+            </li>
+            <li class="sidebar-item">
+                @Html.ActionLink("Login", "Login", "Account", new { @class = "sidebar-link" })
+            </li>
+            <li class="sidebar-item">
+                @Html.ActionLink("Logout", "Logout", "Account", new { @class = "sidebar-link" })
+            </li>
+            <li class="sidebar-item">
+                @Html.ActionLink("Profile", "Profile", "Account", new { @class = "sidebar-link" })
+            </li>
+        </ul>
     </div>
 </nav>
