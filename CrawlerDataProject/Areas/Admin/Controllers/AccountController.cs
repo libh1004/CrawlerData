@@ -1,10 +1,10 @@
 ﻿using CrawlerDataProject.Data;
 using CrawlerDataProject.Models;
 using CrawlerDataProject.ViewModels;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CrawlerDataProject.Areas.Admin.Controllers
@@ -13,10 +13,60 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
     {
         MyDbContext db = new MyDbContext();
         [HttpGet]
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Accounts.ToList());
+
+            ViewBag.ListAccount = this.db.Accounts.ToList();
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var accounts = from p in db.Accounts
+                           select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                accounts = accounts.Where(p => p.Fullname.Contains(searchString) || p.Email.Contains(searchString) || p.Phone.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+
+                case "id_desc":
+                    accounts = accounts.OrderByDescending(p => p.Id);
+                    break;
+                default:
+                    accounts = accounts.OrderBy(p => p.Id);
+                    break;
+            }
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(accounts.ToPagedList(pageNumber, pageSize));
         }
+
+        [HttpPost]
+        public ActionResult Index(FormCollection formCollection)
+        {
+            string[] ids = formCollection["Id"].Split(new char[] { ',' });
+            foreach (string id in ids)
+            {
+                var account = this.db.Accounts.Find(int.Parse(id));
+                this.db.Accounts.Remove(account);
+                this.db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -38,7 +88,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         }
         public ActionResult Details(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
@@ -48,7 +98,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             return View(account);
-           // var account = db.Accounts.Find(accountId);
+            // var account = db.Accounts.Find(accountId);
             //return View(account);
         }
         [HttpGet]
@@ -72,26 +122,17 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public ActionResult Delete(IEnumerable<int> idDelete)
         {
-            if (id == null)
+            foreach (var item in idDelete)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                var delete = db.Accounts.SingleOrDefault(s => s.Id == item);
+                db.Accounts.Attach(delete);
+                db.Accounts.Remove(delete);
             }
-            Account accountDelete = db.Accounts.Find(id);
-            if (accountDelete == null)
-            {
-                return HttpNotFound();
-            }
-            return View(accountDelete);
-        }
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            var account = db.Accounts.Find(id);
-            db.Accounts.Remove(account);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Display");
         }
     }
 }

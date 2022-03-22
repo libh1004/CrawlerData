@@ -1,5 +1,5 @@
-﻿@model PagedList.IPagedList<CrawlerDataProject.Models.Article>
-@using PagedList.Mvc;
+﻿@model PagedList.IPagedList<CrawlerDataProject.Models.Feedback>
+@using PagedList.Mvc
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
@@ -8,10 +8,10 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" } )
 </p>
 
-@using (Html.BeginForm("Index", "Articles", FormMethod.Get))
+@using (Html.BeginForm("Index", "Feedback", FormMethod.Get))
 {
     <p>
         Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
@@ -25,19 +25,13 @@
             @Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.IdSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Title
+            AccountId
         </th>
         <th>
-            Content
+            ArticleId
         </th>
         <th>
-            Thumbnail
-        </th>
-        <th>
-            Author
-        </th>
-        <th>
-            SourceId
+            Description
         </th>
         <th></th>
     </tr>
@@ -49,19 +43,13 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.AccountId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+                @Html.DisplayFor(modelItem => item.ArticleId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Thumbnail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SourceId)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

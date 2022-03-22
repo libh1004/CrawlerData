@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CrawlerDataProject.Data;
+using CrawlerDataProject.Models;
+using PagedList;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using CrawlerDataProject.Data;
-using CrawlerDataProject.Models;
 
 namespace CrawlerDataProject.Areas.Admin.Controllers
 {
@@ -16,9 +15,43 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         private MyDbContext db = new MyDbContext();
 
         // GET: Admin/Articles
-        public ActionResult Index()
+        [HttpGet]
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Articles.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var articles = from p in db.Articles
+                           select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                articles = articles.Where(p => p.Title.Contains(searchString) || p.Thumbnail.Contains(searchString) || p.Author.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+
+                case "id_desc":
+                    articles = articles.OrderByDescending(p => p.Id);
+                    break;
+                default:
+                    articles = articles.OrderBy(p => p.Id);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(articles.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/Articles/Details/5
