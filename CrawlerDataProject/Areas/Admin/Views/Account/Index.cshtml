@@ -9,7 +9,11 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<div>
+    <p>Find information account: @Html.TextBox("keyword")</p>
+    <input type="submit" value="Search"/>
+</div>
+<table class="table" >
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Fullname)

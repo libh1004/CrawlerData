@@ -1,0 +1,27 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ListLink
+        </th>
+        <th>Get Content</th>
+    </tr>
+@foreach (var item in Model) {
+<tr>
+    <td>@item</td>
+    <td>
+        @Html.ActionLink("GetContent", "GetArticle", "Source")
+    </td>
+</tr>
+}
+</table>

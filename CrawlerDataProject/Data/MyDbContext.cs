@@ -1,4 +1,5 @@
-﻿using CrawlerDataProject.Models;
+﻿using CrawlerDataProject.Migrations;
+using CrawlerDataProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,7 +12,7 @@ namespace CrawlerDataProject.Data
     {
         public MyDbContext() : base("name=ConnectionString")
         {
-
+            //Database.SetInitializer(new CategoryDBInitializer());
         }
         public DbSet<Source> Sources { get; set; }
         public DbSet<Article> Articles { get; set; }

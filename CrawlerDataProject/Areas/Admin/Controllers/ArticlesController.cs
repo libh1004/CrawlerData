@@ -6,14 +6,17 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using CrawlerContent;
 using CrawlerDataProject.Data;
 using CrawlerDataProject.Models;
+using HtmlAgilityPack;
 
 namespace CrawlerDataProject.Areas.Admin.Controllers
 {
     public class ArticlesController : Controller
     {
         private MyDbContext db = new MyDbContext();
+        ContentJob contentJob = new ContentJob();
 
         // GET: Admin/Articles
         public ActionResult Index()
@@ -28,7 +31,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
+            Models.Article article = db.Articles.Find(id);
             if (article == null)
             {
                 return HttpNotFound();
@@ -47,7 +50,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Content,Thumbnail,Author,SourceId")] Article article)
+        public ActionResult Create([Bind(Include = "Id,Title,Content,Thumbnail,Author,SourceId")] Models.Article article)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +69,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
+            Models.Article article = db.Articles.Find(id);
             if (article == null)
             {
                 return HttpNotFound();
@@ -79,7 +82,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,Thumbnail,Author,SourceId")] Article article)
+        public ActionResult Edit([Bind(Include = "Id,Title,Content,Thumbnail,Author,SourceId")] CrawlerContent.Article article)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +100,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
+            Models.Article article = db.Articles.Find(id);
             if (article == null)
             {
                 return HttpNotFound();
@@ -110,7 +113,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Article article = db.Articles.Find(id);
+            Models.Article article = db.Articles.Find(id);
             db.Articles.Remove(article);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -124,5 +127,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+       
     }
 }
