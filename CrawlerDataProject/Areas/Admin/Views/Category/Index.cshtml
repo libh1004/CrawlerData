@@ -1,5 +1,5 @@
-﻿@model PagedList.IPagedList<CrawlerDataProject.Models.Article>
-@using PagedList.Mvc;
+﻿@model PagedList.IPagedList<CrawlerDataProject.Models.Category>
+@using PagedList.Mvc
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
@@ -8,10 +8,10 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" } )
 </p>
 
-@using (Html.BeginForm("Index", "Articles", FormMethod.Get))
+@using (Html.BeginForm("Index", "Category", FormMethod.Get))
 {
     <p>
         Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
@@ -25,19 +25,7 @@
             @Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.IdSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Title
-        </th>
-        <th>
-            Content
-        </th>
-        <th>
-            Thumbnail
-        </th>
-        <th>
-            Author
-        </th>
-        <th>
-            SourceId
+            Name
         </th>
         <th></th>
     </tr>
@@ -49,19 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Thumbnail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SourceId)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

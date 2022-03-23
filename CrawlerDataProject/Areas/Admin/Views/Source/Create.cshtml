@@ -39,9 +39,21 @@
                             <input type="reset" value="Reset Form" class="btn btn-secondary" />
                         </div>
                     </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LinksSelector, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LinksSelector, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LinksSelector, "", new { @class = "text-danger" })
                 </div>
             </form>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectorTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelectorTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SelectorTitle, "", new { @class = "text-danger" })
     </div>
     <div class="row hidden-linh" id="step2">
         <div class="col-12 col-lg-12">
@@ -57,8 +69,20 @@
                         <input type="reset" value="Quay lại" onclick="displayOnly('step1')" class="btn btn-secondary" />
                     </div>
                 </div>                
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectorThumbnail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelectorThumbnail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SelectorThumbnail, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectorAuthor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelectorAuthor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SelectorAuthor, "", new { @class = "text-danger" })
     </div>
     <div class="row hidden-linh" id="step3">
         <div class="col-12 col-lg-12">

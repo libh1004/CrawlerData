@@ -1,11 +1,10 @@
 ﻿using CrawlerDataProject.Data;
 using CrawlerDataProject.Models;
 using CrawlerDataProject.ViewModels;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CrawlerDataProject.Areas.Admin.Controllers
@@ -14,10 +13,60 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
     {
         MyDbContext db = new MyDbContext();
         [HttpGet]
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Accounts.ToList());
+
+            ViewBag.ListAccount = this.db.Accounts.ToList();
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var accounts = from p in db.Accounts
+                           select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                accounts = accounts.Where(p => p.Fullname.Contains(searchString) || p.Email.Contains(searchString) || p.Phone.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+
+                case "id_desc":
+                    accounts = accounts.OrderByDescending(p => p.Id);
+                    break;
+                default:
+                    accounts = accounts.OrderBy(p => p.Id);
+                    break;
+            }
+
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(accounts.ToPagedList(pageNumber, pageSize));
         }
+
+        [HttpPost]
+        public ActionResult Index(FormCollection formCollection)
+        {
+            string[] ids = formCollection["Id"].Split(new char[] { ',' });
+            foreach (string id in ids)
+            {
+                var account = this.db.Accounts.Find(int.Parse(id));
+                this.db.Accounts.Remove(account);
+                this.db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -48,7 +97,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Details(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -62,6 +111,10 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 return View(account);
             }
            
+        }
+            return View(account);
+            // var account = db.Accounts.Find(accountId);
+            //return View(account);
         }
         [HttpGet]
         public ActionResult Edit(int accountId)
@@ -105,6 +158,14 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 return result.ToList();
             }
             else
+            db.Entry(account).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult Delete(IEnumerable<int> idDelete)
+        {
+            foreach (var item in idDelete)
             {
                 return db.Accounts.ToList();
             }
@@ -119,6 +180,10 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 Phone = accountViewModel.Phone
             };
             db.Accounts.Add(acc);
+                var delete = db.Accounts.SingleOrDefault(s => s.Id == item);
+                db.Accounts.Attach(delete);
+                db.Accounts.Remove(delete);
+            }
             db.SaveChanges();
             return View(acc);
         }
@@ -134,6 +199,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         public ActionResult Profile()
         {
             return View();
+            return RedirectToAction("Display");
         }
     }
 }
