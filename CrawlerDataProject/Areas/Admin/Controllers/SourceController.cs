@@ -135,4 +135,5 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
     }
+
 }
