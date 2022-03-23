@@ -5,7 +5,7 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Net;
 using System.Web.Mvc;
 
 namespace CrawlerDataProject.Areas.Admin.Controllers
@@ -112,10 +112,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 return View(account);
             }
         }
-            return View(account);
-            // var account = db.Accounts.Find(accountId);
-            //return View(account);
-        }
         [HttpGet]
         public ActionResult Edit(int accountId)
         {
@@ -157,6 +153,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 var result = from p in db.Accounts.Where(a => a.Phone.Equals(keyword)) select p;
                 return result.ToList();
             }
+            return null;
         }
         [HttpPost]
         public ActionResult Delete(IEnumerable<int> idDelete)
@@ -192,7 +189,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         public ActionResult Profile()
         {
             return View();
-            return RedirectToAction("Display");
         }
     }
 

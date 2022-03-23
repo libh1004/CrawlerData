@@ -28,9 +28,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View(db.Sources.ToList());
-        private MyDbContext db = new MyDbContext();
-
-        // GET: Admin/Articles
+        }
         [HttpGet]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
 
@@ -71,94 +69,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(sources.ToPagedList(pageNumber, pageSize));
-        }
-
-        // POST: Admin/Articles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ListLink,LinksSelector,SelectorTitle" +
-            ",SelectorContent,SelectorThumbnail,SelectorAuthor,AuthorId,Status")] Source source)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Sources.Add(source);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(source);
-        }
-
-        // GET: Admin/Articles/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Article article = db.Articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            return View(article);
-        }
-
-        // POST: Admin/Articles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public ActionResult Create(SourceViewModel sourceViewModel)
-        {
-            var source = new Models.Source()
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ListLink,LinksSelector,SelectorTitle" +
-            ",SelectorContent,SelectorThumbnail,SelectorAuthor,AuthorId,Status")] Source source)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(source).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(source);
-        }
-
-        // GET: Admin/Articles/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Source source = db.Sources.Find(id);
-            if (source == null)
-            {
-                Name = sourceViewModel.Name
-            };
-            db.Sources.Add(source);
-                return HttpNotFound();
-            }
-            return View(source);
-        }
-
-        // POST: Admin/Articles/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Source source = db.Sources.Find(id);
-            db.Sources.Remove(source);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        // GET: Admin/Articles/Create
-        public ActionResult Create()
-        {
-            return View();
         }
 
         // POST: Admin/Articles/Create
@@ -217,69 +127,37 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         }
 
         // GET: Admin/Articles/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Models.Source source = db.Sources.Find(id);
-        //    if (source == null)
-        //    {
-        //        Name = sourceViewModel.Name
-        //    };
-        //    db.Sources.Add(source);
-        //        return HttpNotFound();
-        //    }
-        //    return View(source);
-        //}
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Models.Source source = db.Sources.Find(id);
+            if (source == null)
+            {
+                return HttpNotFound();
+            };
+            db.Sources.Add(source);
+            return View();
+        }
 
-        //// POST: Admin/Articles/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //Models.Source source = db.Sources.Find(id);
-        //    db.Sources.Remove(source);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-        //[HttpGet]
-        //public ActionResult Edit(int id)
-        //{
-        //    var source = db.Sources.Find(id);
-        //    return View(source);
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(Models.Source updateSource)
-        //{
-        //    db.Entry(updateSource).State = System.Data.Entity.EntityState.Modified;
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-        //public ActionResult Details(int id, string source)
-        //{
-        //    return View(helloJob.GetLinks(source));
+        // POST: Admin/Articles/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Models.Source source = db.Sources.Find(id);
+            db.Sources.Remove(source);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-        //}
-        //public ActionResult GetArticle()
-        //{
-        //    var sources = from s in db.Sources select s;
-        //    Debug.WriteLine(sources);
-        //    foreach (var source in sources)
-        //    {
-        //        foreach (var item in source.ListLink)
-        //        {
-        //            if (item.Status == 0)
-        //            {
-        //                contentJob.GetContent(item.Url);
-        //                item.Status = 1;
-        //            }
-        //        }
-        //    }
-        //    return View("Index");
-        //}
+        // GET: Admin/Articles/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
         [HttpGet]
         public async Task<ActionResult> GetLinkDetailFromSourceLink(string link, string selector)
         {

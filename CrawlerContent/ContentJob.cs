@@ -25,35 +25,6 @@ namespace CrawlerContent
             //}
             // save in db
         }
-        // ben nay dang nhan vao 1 string ==!
-        // khi do nhan vao day phai la 1 url =)))
-        public Article GetContent(string url)
-        {
-            var web = new HtmlWeb();
-            HtmlDocument doc = web.Load(url);
-            var titleNode = doc.QuerySelector("h1.title-detail");
-            var title = titleNode.InnerText;
-            var descriptionNode = doc.QuerySelector("p.description");
-            var desc = descriptionNode.InnerText;
-            var contentNode = doc.QuerySelector("article.fck_detail");
-            var content = contentNode.InnerText;
-            var thumbnailNode = doc.QuerySelector("article.fck_detail img");
-            var thumbnail = thumbnailNode.Attributes["data-src"].Value;
-            var authorNode = doc.QuerySelector("p strong");
-            var author = "";
-            if (authorNode.InnerText.Length > 0)
-            {
-                author = authorNode.InnerText;
-            }
-            Article article = new Article()
-            {
-                Title = title,
-                Description = desc,
-                Content = content,
-                Thumbnail = thumbnail,
-                Author = author
-            };
-            return article;
-        }
+
     }
 }
