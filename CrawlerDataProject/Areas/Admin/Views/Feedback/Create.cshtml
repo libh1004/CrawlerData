@@ -3,19 +3,18 @@
 @{
     ViewBag.Title = "Create";
 }
-
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
-        <h4>Feedback</h4>
+        <div class="mb-3">
+            <h1 class="h3 d-inline align-middle">Thêm mới Feeback</h1>
+            <a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
+                Nhập các thông tin bên dưới
+            </a>
+        </div>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="row">
         <div class="card">
             <div class="card-body">
                 <div class="m-sm-3">
@@ -36,32 +35,22 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="m-sm-3">
-                    <div class="col-md-12">
-                        <label>
-                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
-                        </label>
-                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                            </label>
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
                     </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-outline-primary" />
+                    <input type="reset" value="Reset Form" class="btn btn-secondary" />
                 </div>
             </div>
         </div>
-        <br />
-        <div class="row">
-            <div class="col-sm-3">
-                @Html.ActionLink("Back to List", "Index" , null, new { @class = "btn btn-primary"})
-            </div>
-            <div class="col-sm-9" style="padding-left: 265px">
-                    <input type="submit" value="Create" class="btn btn-outline-primary" />
-            </div>
-        </div>
     </div>
-    </div>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }
