@@ -14,14 +14,14 @@ namespace CrawlerURL
     {
         public async Task Execute(IJobExecutionContext context)
         {
-            List<Article> articles = new List<Article>();
-            var filterData = db.Sources;
-            filterData = filterData.Where(x => x.Status = 3);
-            foreach (var item in filterData)
-            {
-                articles.Add(GetLinks(item.Url));
-                item.Status = 4;// set flag to mark it done
-            }
+            //List<Article> articles = new List<Article>();
+            //var filterData = db.Sources;
+            //filterData = filterData.Where(x => x.Status = 3);
+            //foreach (var item in filterData)
+            //{
+            //    articles.Add(GetLinks(item.Url));
+            //    item.Status = 4;// set flag to mark it done
+            //}
 
             // save articles to DB
 
@@ -44,8 +44,7 @@ namespace CrawlerURL
                 Console.WriteLine(link.ToString());
                 Console.ReadLine();
             }
-            return setLink;
-            Console.ReadLine();
+            return null;
         }
     }
 }
