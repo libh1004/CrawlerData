@@ -1,4 +1,5 @@
-﻿using CrawlerDataProject.Data;
+﻿using CrawlerContent;
+using CrawlerDataProject.Data;
 using CrawlerDataProject.Models;
 using PagedList;
 using System;

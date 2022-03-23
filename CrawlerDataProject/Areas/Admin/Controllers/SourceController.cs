@@ -135,7 +135,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         }
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,ListLink,LinksSelector,SelectorTitle" +
-            ",SelectorContent,SelectorThumbnail,SelectorAuthor,AuthorId,Status")] Source source)
+            ",SelectorContent,SelectorThumbnail,SelectorAuthor,AuthorId,Status")] Models.Source source)
         {
             if (ModelState.IsValid)
             {
