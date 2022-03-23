@@ -1,9 +1,10 @@
 ﻿
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
-            <span class="align-middle">AdminKit</span>
-        </a>
+        @*<a class="sidebar-brand" href="index.html">
+            <span class="align-middle">AdminKit</span>*@
+            @Html.ActionLink("AdminKit", "", routeValues: null, htmlAttributes: new { @class = "sidebar-brand" })
+        @*</a>*@
         <ul class="sidebar-nav">
             <li class="sidebar-item">
                 @Html.ActionLink("Sources", "Index", "Source", routeValues: null, htmlAttributes: new { @class = "sidebar-link" })

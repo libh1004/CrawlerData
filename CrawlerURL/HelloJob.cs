@@ -26,25 +26,5 @@ namespace CrawlerURL
             // save articles to DB
 
         }
-        public List<Article> GetLinks(string source)
-        {
-            Console.OutputEncoding = Encoding.UTF8;
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument doc = web.Load("https://vnexpress.net/giao-duc");
-            var nodeList = doc.QuerySelectorAll("h3.title-news a");
-            HashSet<string> setLink = new HashSet<string>();
-            foreach (var node in nodeList)
-            {
-                var link = node.Attributes["href"].Value;
-                if (string.IsNullOrEmpty(link))
-                {
-                    continue;
-                }
-                setLink.Add(link);
-                Console.WriteLine(link.ToString());
-                Console.ReadLine();
-            }
-            return null;
-        }
     }
 }
