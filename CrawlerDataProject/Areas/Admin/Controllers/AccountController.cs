@@ -5,7 +5,7 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Net;
 using System.Web.Mvc;
 
 namespace CrawlerDataProject.Areas.Admin.Controllers
@@ -71,7 +71,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-           
+
             return View();
         }
         [HttpPost]
@@ -103,7 +103,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Account account = db.Accounts.Find(id);
-            if(account == null)
+            if (account == null)
             {
                 return HttpNotFound();
             }
@@ -112,19 +112,18 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 return View(account);
             }
         }
-            return View(account);
-            // var account = db.Accounts.Find(accountId);
-            //return View(account);
-        }
+        // var account = db.Accounts.Find(accountId);
+        //return View(account);
+
         [HttpGet]
         public ActionResult Edit(int accountId)
         {
-            if(accountId == null)
+            if (accountId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Account acc = db.Accounts.Find(accountId);
-            if(acc == null)
+            if (acc == null)
             {
                 return HttpNotFound();
             }
@@ -152,7 +151,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         }
         public List<Account> Search(string keyword)
         {
-            if(keyword != null)
+            if (keyword != null)
             {
                 var result = from p in db.Accounts.Where(a => a.Phone.Equals(keyword)) select p;
                 return result.ToList();
@@ -195,5 +194,4 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             return RedirectToAction("Display");
         }
     }
-
 }
