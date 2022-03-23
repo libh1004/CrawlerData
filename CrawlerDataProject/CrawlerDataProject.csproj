@@ -58,6 +58,12 @@
       <HintPath>..\packages\HtmlAgilityPack.CssSelectors.1.0.2\lib\net45\HtmlAgilityPack.CssSelectors.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -144,9 +150,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202203091809423_InitData.cs" />
-    <Compile Include="Migrations\202203091809423_InitData.designer.cs">
-      <DependentUpon>202203091809423_InitData.cs</DependentUpon>
+    <Compile Include="Migrations\202203141524245_InitData.cs" />
+    <Compile Include="Migrations\202203141524245_InitData.Designer.cs">
+      <DependentUpon>202203141524245_InitData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202203171350571_InitDatabase.cs" />
     <Compile Include="Migrations\202203171350571_InitDatabase.Designer.cs">
@@ -274,6 +280,7 @@
     <Content Include="Content\webfonts\fa-brands-400.svg" />
     <Content Include="Content\webfonts\fa-regular-400.svg" />
     <Content Include="Content\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -343,6 +350,21 @@
     <Content Include="Areas\Admin\Views\Source\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Source\GetArticle.cshtml" />
     <Content Include="Areas\Admin\Views\Articles\GetArticle.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedback\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedback\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedback\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedback\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedback\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Source\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Source\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Source\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Source\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Source\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -390,8 +412,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202203091809423_InitData.resx">
-      <DependentUpon>202203091809423_InitData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202203141524245_InitData.resx">
+      <DependentUpon>202203141524245_InitData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203171350571_InitDatabase.resx">
       <DependentUpon>202203171350571_InitDatabase.cs</DependentUpon>

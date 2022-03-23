@@ -40,80 +40,100 @@
                             <input type="reset" value="Reset Form" class="btn btn-secondary" />
                         </div>
                     </div>
-                </div>
             </form>
         </div>
-    </div>
-    <div class="row hidden-linh" id="step2">
-        <div class="col-12 col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Danh sách link tìm được</h5>
-                </div>
-                <div class="card-body">
-                    <ul id="links">
-                    </ul>
-                    <div class="form-group">
-                        <input type="submit" name="btnSubmit" onclick="displayOnly('step3')" value="Bước tiếp theo" class="btn btn-primary" />
-                        <input type="reset" value="Quay lại" onclick="displayOnly('step1')" class="btn btn-secondary" />
+
+        <div class="form-group">
+
+            <div class="row hidden-linh" id="step2">
+                <div class="col-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Danh sách link tìm được</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul id="links">
+                            </ul>
+                            <div class="form-group">
+                                <input type="submit" name="btnSubmit" onclick="displayOnly('step3')" value="Bước tiếp theo" class="btn btn-primary" />
+                                <input type="reset" value="Quay lại" onclick="displayOnly('step1')" class="btn btn-secondary" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SelectorThumbnail, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SelectorThumbnail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SelectorThumbnail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SelectorAuthor, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SelectorAuthor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SelectorAuthor, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row hidden-linh" id="step3">
+                                <div class="col-12 col-lg-12">
+                                    <form action="/" method="post" name="add-article-selector">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Nhập selector cho bài viết chi tiết</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3 form-group">
+                                                    <input type="text" name="titleSelector" class="form-control" placeholder="Selector cho tiêu đề bài viết">
+                                                </div>
+                                                <div class="mb-3 form-group">
+                                                    <input type="text" name="descriptionSelector" class="form-control" placeholder="Selector cho mô tả bài viết">
+                                                </div>
+                                                <div class="mb-3 form-group">
+                                                    <input type="text" name="thumbnailSelector" class="form-control" placeholder="Selector cho ảnh đại diện bài viết">
+                                                </div>
+                                                <div class="mb-3 form-group">
+                                                    <input type="text" name="contentSelector" class="form-control" placeholder="Selector cho nội dung bài viết">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" name="btnSubmit" value="Preview Bài Viết" class="btn btn-primary" />
+                                                    <input type="reset" value="Quay lại" onclick="displayOnly('step2')" class="btn btn-secondary" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row hidden-linh" id="step4">
+                                <div class="col-12 col-lg-12">
+                                    <form action="/" method="post" name="submit-source">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title mb-0">Preview bài viết chi tiết</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <div id="article-title"></div>
+                                                    <div id="article-description"></div>
+                                                    <div id="article-thumbnail"></div>
+                                                    <div id="article-content"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" name="btnSubmit" value="Lưu nguồn" class="btn btn-primary" />
+                                                    <input type="reset" value="Quay lại" onclick="displayOnly('step3')" class="btn btn-secondary" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
-    <div class="row hidden-linh" id="step3">
-        <div class="col-12 col-lg-12">
-            <form action="/" method="post" name="add-article-selector">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Nhập selector cho bài viết chi tiết</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3 form-group">
-                            <input type="text" name="titleSelector" class="form-control" placeholder="Selector cho tiêu đề bài viết">
-                        </div>
-                        <div class="mb-3 form-group">
-                            <input type="text" name="descriptionSelector" class="form-control" placeholder="Selector cho mô tả bài viết">
-                        </div>
-                        <div class="mb-3 form-group">
-                            <input type="text" name="thumbnailSelector" class="form-control" placeholder="Selector cho ảnh đại diện bài viết">
-                        </div>
-                        <div class="mb-3 form-group">
-                            <input type="text" name="contentSelector" class="form-control" placeholder="Selector cho nội dung bài viết">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="btnSubmit" value="Preview Bài Viết" class="btn btn-primary" />
-                            <input type="reset" value="Quay lại" onclick="displayOnly('step2')" class="btn btn-secondary" />
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row hidden-linh" id="step4">
-        <div class="col-12 col-lg-12">
-            <form action="/" method="post" name="submit-source">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Preview bài viết chi tiết</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div id="article-title"></div>
-                            <div id="article-description"></div>
-                            <div id="article-thumbnail"></div>
-                            <div id="article-content"></div>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="btnSubmit" value="Lưu nguồn" class="btn btn-primary" />
-                            <input type="reset" value="Quay lại" onclick="displayOnly('step3')" class="btn btn-secondary" />
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>
+
 @section scripts{
     <script>
         let currentStep = 1;
@@ -133,13 +153,13 @@
             $('form[name="add-source"] input[name="btnSubmit"]').click(handleSubmitForm);
             $('form[name="add-article-selector"] input[name="btnSubmit"]').click(handleSubmitSelector);
             $('form[name="submit-source"] input[name="btnSubmit"]').click(handleSaveSource);
-            
+
         })
 
-        function displayOnly(stepName) {            
+        function displayOnly(stepName) {
             for (const [key, value] of Object.entries(mapStep)) {
                 mapStep[key].addClass('hidden-linh');
-            }          
+            }
             if (mapStep[stepName]) {
                 mapStep[stepName].removeClass('hidden-linh');
             }
@@ -154,8 +174,8 @@
                 sourceName: sourceName,
                 sourceLink: sourceLink,
                 sourceSelector: sourceSelector
-            }            
-            getLinkDetailFromSourceLink(sourceLink, sourceSelector);            
+            }
+            getLinkDetailFromSourceLink(sourceLink, sourceSelector);
         }
 
         function handleSubmitSelector(event) {
@@ -217,7 +237,7 @@
                             htmlToAppend += `<li>${dataJson.links[i]}</li>`
                         }
                         linkList.html(htmlToAppend);
-                    }                   
+                    }
                     displayOnly('step2');
                 }
             }
@@ -226,3 +246,4 @@
         }
     </script>
 }
+
