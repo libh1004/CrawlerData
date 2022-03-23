@@ -1,4 +1,4 @@
-﻿using CrawlerURL;
+﻿using CrawlerContent;
 using HtmlAgilityPack;
 using Quartz;
 using Quartz.Impl;
@@ -12,20 +12,24 @@ namespace CrawlerContent
 {
     public class Program
     {
+        Article art = new Article();
         public static async Task Main(string[] args)
         {
+            //var hello = new ContentJob();
             Console.OutputEncoding = Encoding.UTF8;
-            var web = new HtmlWeb();
+            // url nay
             var url = "https://vnexpress.net/omicron-chua-phai-lan-song-cuoi-cung-cua-dai-dich-4436334.html";
+            var web = new HtmlWeb();
             Console.WriteLine("Crawling data from: " + url);
             HtmlDocument doc = web.Load(url);
             var titleNode = doc.QuerySelector("h1.title-detail");
+            var title = titleNode.InnerText;
             var descriptionNode = doc.QuerySelector("p.description");
             var desc = descriptionNode.InnerText;
             var contentNode = doc.QuerySelector("article.fck_detail");
             var content = contentNode.InnerText;
-            var imageNode = doc.QuerySelector("article.fck_detail img");
-            var image = imageNode.Attributes["data-src"].Value;
+            var thumbnailNode = doc.QuerySelector("article.fck_detail img");
+            var thumbnail = thumbnailNode.Attributes["data-src"].Value;
             var authorNode = doc.QuerySelector("p strong");
             var author = "";
             if (authorNode.InnerText.Length > 0)
@@ -35,32 +39,32 @@ namespace CrawlerContent
             Article article = new Article()
             {
                 Url = url,
-                Description = desc,
+                Title = title,
                 Content = content,
-                Image = image,
+                Thumbnail = thumbnail,
                 Author = author
             };
             Console.WriteLine(article.ToString());
             Console.ReadLine();
-
+            //xong truyen url vao cai ham nay --> tuc la phai truyen URL vao kia de lay ra bai viet
+            //var article = hello.GetContent(url);
+            //Console.WriteLine(article.ToString());
             //StdSchedulerFactory factory = new StdSchedulerFactory();
-
-            //IScheduler scheduler = await factory.GetScheduler();
-            //await scheduler.Start();
-
-            //IJobDetail job = JobBuilder.Create<HelloJob>()
-            //    .WithIdentity("myjob1", "group1")
+            //IScheduler sched = await factory.GetScheduler();
+            //sched.Start();
+            //IJobDetail job = JobBuilder.Create<ContentJob>()
+            //    .WithIdentity("myjob", "group1")
             //    .Build();
-
             //ITrigger trigger = TriggerBuilder.Create()
-            //    .WithIdentity("myTrigger1", "group1")
+            //    .WithIdentity("mytrigger", "group1")
             //    .StartNow()
             //    .WithSimpleSchedule(x => x
-            //        .WithIntervalInSeconds(5)
+            //        .WithIntervalInSeconds(2)
             //        .RepeatForever())
             //    .Build();
-
-            //scheduler.ScheduleJob(job, trigger);
+            //sched.ScheduleJob(job, trigger);
+            //Console.ReadLine();
         }
+
     }
 }

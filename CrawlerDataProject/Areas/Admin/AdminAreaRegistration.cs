@@ -17,7 +17,7 @@ namespace CrawlerDataProject.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { controller = "Account", action = "Index", id = UrlParameter.Optional }
+                new {controller ="Dashboard", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

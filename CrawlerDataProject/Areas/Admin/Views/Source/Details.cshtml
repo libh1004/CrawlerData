@@ -112,3 +112,19 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            ListLink
+        </th>
+        <th>Get Content</th>
+    </tr>
+@foreach (var item in Model) {
+<tr>
+    <td>@item</td>
+    <td>
+        @Html.ActionLink("GetContent", "GetArticle", "Source")
+    </td>
+</tr>
+}
+</table>

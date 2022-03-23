@@ -70,54 +70,94 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+           
             return View();
         }
         [HttpPost]
         public ActionResult Create(AccountViewModel acc)
         {
-            Account account = new Account()
+            if (acc == null)
             {
-                Fullname = acc.Fullname,
-                Email = acc.Email,
-                Password = acc.Password,
-                Phone = acc.Phone
-            };
-            db.Accounts.Add(account);
-            db.SaveChanges();
+                return HttpNotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                Account account = new Account()
+                {
+                    Fullname = acc.Fullname,
+                    Email = acc.Email,
+                    Password = acc.Password,
+                    Phone = acc.Phone
+                };
+                db.Accounts.Add(account);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Account account = db.Accounts.Find(id);
-            if (account == null)
+            if(account == null)
             {
                 return HttpNotFound();
             }
+            else
+            {
+                return View(account);
+            }
+           
+        }
             return View(account);
             // var account = db.Accounts.Find(accountId);
             //return View(account);
         }
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int accountId)
         {
-            if (id == null)
+            if(accountId == null)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account accountEdit = db.Accounts.Find(id);
-            if (accountEdit == null)
+            Account acc = db.Accounts.Find(accountId);
+            if(acc == null)
             {
                 return HttpNotFound();
             }
-            return View(accountEdit);
+            return View("Index");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Account account)
         {
+            if (ModelState.IsValid)
+            {
+                db.Entry(account).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(account);
+        }
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var account = db.Accounts.Find(id);
+            db.Accounts.Remove(account);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public List<Account> Search(string keyword)
+        {
+            if(keyword != null)
+            {
+                var result = from p in db.Accounts.Where(a => a.Phone.Equals(keyword)) select p;
+                return result.ToList();
+            }
+            else
             db.Entry(account).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -127,11 +167,38 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         {
             foreach (var item in idDelete)
             {
+                return db.Accounts.ToList();
+            }
+        }
+        public ActionResult Register(AccountViewModel accountViewModel)
+        {
+            var acc = new Account()
+            {
+                Fullname = accountViewModel.Fullname,
+                Password = accountViewModel.Password,
+                Email = accountViewModel.Email,
+                Phone = accountViewModel.Phone
+            };
+            db.Accounts.Add(acc);
                 var delete = db.Accounts.SingleOrDefault(s => s.Id == item);
                 db.Accounts.Attach(delete);
                 db.Accounts.Remove(delete);
             }
             db.SaveChanges();
+            return View(acc);
+        }
+        public ActionResult Login(string username, string password)
+        {
+
+            return View();
+        }
+        public ActionResult Logout()
+        {
+            return View();
+        }
+        public ActionResult Profile()
+        {
+            return View();
             return RedirectToAction("Display");
         }
     }
