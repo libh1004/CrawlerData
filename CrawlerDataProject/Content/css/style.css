@@ -3175,4 +3175,9 @@ button:focus {
   }
 }
 
+.inner img {
+    height: 50px;
+}
+
+
 /*# sourceMappingURL=style.css.map */
