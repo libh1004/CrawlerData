@@ -89,8 +89,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Article.cs" />
     <Compile Include="ContentJob.cs" />
+    <Compile Include="MyDbContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -99,9 +99,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CrawlerURL\CrawlerURL.csproj">
-      <Project>{7220B890-3789-4573-97FB-4C46CD703374}</Project>
-      <Name>CrawlerURL</Name>
+    <ProjectReference Include="..\CrawlerDataProject\CrawlerDataProject.csproj">
+      <Project>{ce170110-f582-41a0-afda-fcdd893a20ff}</Project>
+      <Name>CrawlerDataProject</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
