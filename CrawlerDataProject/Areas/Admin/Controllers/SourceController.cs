@@ -1,15 +1,13 @@
 ﻿using CrawlerDataProject.Data;
-using CrawlerDataProject.Models;
 using PagedList;
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using System.Diagnostics;
-using System.Net.Http;
+using CrawlerURL;
+using CrawlerContent;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 using HtmlAgilityPack;
 using CrawlerDataProject.ViewModels;
 using System.Collections.Generic;
