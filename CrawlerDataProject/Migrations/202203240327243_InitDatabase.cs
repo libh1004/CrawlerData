@@ -3,7 +3,7 @@ namespace CrawlerDataProject.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitData : DbMigration
+    public partial class InitDatabase : DbMigration
     {
         public override void Up()
         {
@@ -16,6 +16,7 @@ namespace CrawlerDataProject.Migrations
                         Password = c.String(),
                         Email = c.String(),
                         Phone = c.String(),
+                        Thumbnail = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -24,11 +25,14 @@ namespace CrawlerDataProject.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Url = c.String(),
                         Title = c.String(),
+                        Description = c.String(),
                         Content = c.String(),
                         Thumbnail = c.String(),
                         Author = c.String(),
                         SourceId = c.Int(nullable: false),
+                        Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -53,22 +57,32 @@ namespace CrawlerDataProject.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Links",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Url = c.String(),
+                        Status = c.Int(nullable: false),
+                        Source_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Sources", t => t.Source_Id)
+                .Index(t => t.Source_Id);
+            
+            CreateTable(
                 "dbo.Sources",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        ListLink = c.String(),
+                        SelectorSource = c.String(),
                         CategoryId = c.Int(nullable: false),
-                        LinksSelector = c.String(),
                         SelectorTitle = c.String(),
                         SelectorContent = c.String(),
+                        SelectorDescription = c.String(),
                         SelectorThumbnail = c.String(),
                         SelectorAuthor = c.String(),
-                        AuthorId = c.Int(nullable: false),
                         Status = c.Int(nullable: false),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -76,7 +90,10 @@ namespace CrawlerDataProject.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Links", "Source_Id", "dbo.Sources");
+            DropIndex("dbo.Links", new[] { "Source_Id" });
             DropTable("dbo.Sources");
+            DropTable("dbo.Links");
             DropTable("dbo.Feedbacks");
             DropTable("dbo.Categories");
             DropTable("dbo.Articles");

@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using CrawlerDataProject.Data;
+using HtmlAgilityPack;
 using Quartz;
 using Quartz.Impl;
 using System;
@@ -16,17 +17,18 @@ namespace CrawlerURL
             StdSchedulerFactory scheFactory = new StdSchedulerFactory();
             IScheduler sche = await scheFactory.GetScheduler();
             await sche.Start();
-            IJobDetail job = JobBuilder.Create<HelloJob>()
+            IJobDetail job = JobBuilder.Create<LinksJob>()
                 .WithIdentity("myjob1", "group1")
                 .Build();
             ITrigger trigger = TriggerBuilder.Create()
                 .WithIdentity("mytrigger1", "group1")
                 .StartNow()
                 .WithSimpleSchedule(x => x
-                    .WithIntervalInSeconds(5)
+                    .WithIntervalInSeconds(3)
                     .RepeatForever())
                 .Build();
             sche.ScheduleJob(job, trigger);
+            Console.ReadLine();
         }
     
     }

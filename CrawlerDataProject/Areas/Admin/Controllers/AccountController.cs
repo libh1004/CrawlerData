@@ -177,14 +177,34 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             db.SaveChanges();
             return View(acc);
         }
+        [HttpPost]
+        public ActionResult Login()
+        {
+            return View();
+        }
         public ActionResult Login(string username, string password)
         {
-
+            if (ModelState.IsValid)
+            {
+                var user = db.Accounts.Where(a => a.Email == username && a.Password == password).ToList();
+                if(user.Count() > 0)
+                {
+                    Session["Email"] = user.FirstOrDefault().Email;
+                    Session["Password"] = user.FirstOrDefault().Password;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.error = "Login failed";
+                    return RedirectToAction("Login");
+                }
+            }
             return View();
         }
         public ActionResult Logout()
         {
-            return View();
+            Session.Clear();
+            return RedirectToAction("Login");
         }
         public ActionResult Profile()
         {

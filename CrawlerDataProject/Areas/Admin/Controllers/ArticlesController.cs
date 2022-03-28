@@ -1,4 +1,4 @@
-﻿using CrawlerContent;
+﻿
 using CrawlerDataProject.Data;
 using CrawlerDataProject.Models;
 using PagedList;
@@ -14,15 +14,11 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
     public class ArticlesController : Controller
     {
         private MyDbContext db = new MyDbContext();
-        ContentJob contentJob = new ContentJob();
-
-        // GET: Admin/Articles
         [HttpGet]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
-
             if (searchString != null)
             {
                 page = 1;
@@ -31,9 +27,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             {
                 searchString = currentFilter;
             }
-
             ViewBag.CurrentFilter = searchString;
-
             var articles = from p in db.Articles
                            select p;
             if (!String.IsNullOrEmpty(searchString))
@@ -42,7 +36,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             switch (sortOrder)
             {
-
                 case "id_desc":
                     articles = articles.OrderByDescending(p => p.Id);
                     break;
@@ -50,13 +43,10 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                     articles = articles.OrderBy(p => p.Id);
                     break;
             }
-
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(articles.ToPagedList(pageNumber, pageSize));
         }
-
-        // GET: Admin/Articles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -70,16 +60,10 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             return View(article);
         }
-
-        // GET: Admin/Articles/Create
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: Admin/Articles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Content,Thumbnail,Author,SourceId")] Models.Article article)
@@ -90,11 +74,8 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(article);
         }
-
-        // GET: Admin/Articles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -108,13 +89,9 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             return View(article);
         }
-
-        // POST: Admin/Articles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,Thumbnail,Author,SourceId")] CrawlerContent.Article article)
+        public ActionResult Edit([Bind(Include = "Id,Title,Content,Thumbnail,Author,SourceId")] Models.Article article)
         {
             if (ModelState.IsValid)
             {
@@ -124,8 +101,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             return View(article);
         }
-
-        // GET: Admin/Articles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -139,8 +114,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             return View(article);
         }
-
-        // POST: Admin/Articles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -150,7 +123,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -159,6 +131,5 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
-       
     }
 }
