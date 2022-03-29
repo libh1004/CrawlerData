@@ -5,12 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using CrawlerURL;
-using CrawlerContent;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using CrawlerDataProject.ViewModels;
 using System.Collections.Generic;
+using CrawlerDataProject.Models;
 
 namespace CrawlerDataProject.Areas.Admin.Controllers
 {
@@ -18,15 +17,9 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
     public class SourceController : Controller
     {
         MyDbContext db = new MyDbContext();
-        //public ActionResult Index()
-        //{
-
-        //    return View(db.Sources.ToList());
-        //}
         [HttpGet]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            Console.WriteLine(db.Sources);
             ViewBag.CurrentSort = sortOrder;
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
 
@@ -60,6 +53,11 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             int pageNumber = (page ?? 1);
             return View(sources.ToPagedList(pageNumber, pageSize));
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult Create([Bind(Include = "Id,Name,SelectorSource, SelectorTitle" +
             ",SelectorContent,SelectorThumbnail, SelectorDescription, SelectorAuthor")] Models.Source source)
@@ -69,9 +67,8 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 var i = db.Sources.Add(source);
                 db.SaveChanges();
                 return Json(i);
-                //return RedirectToAction("Index");
             }
-            return View(source);
+            return View("Index");
         }
         [HttpPost]
         public ActionResult SaveUrl(List<Link> links)
@@ -80,9 +77,9 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             {
                 db.Links.Add(link);
                 db.SaveChanges();
-                
+                return View("Index");
             }
-            return RedirectToAction("Index");
+            return View("Index");
         }
         public ActionResult Edit(int? id)
         {
@@ -112,29 +109,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
 
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Models.Source source = db.Sources.Find(id);
-            if (source == null)
-            {
-                return HttpNotFound();
-            };
-            db.Sources.Add(source);
-            return View();
-        }
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Models.Source source = db.Sources.Find(id);
-            db.Sources.Remove(source);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        public ActionResult Create()
-        {
+         
             return View();
         }
         [HttpGet]

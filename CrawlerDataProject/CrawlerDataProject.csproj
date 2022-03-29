@@ -181,7 +181,6 @@
     <Compile Include="Migrations\202203240327243_InitDatabase.Designer.cs">
       <DependentUpon>202203240327243_InitDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\CategoryDBInitializer.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Article.cs" />
@@ -199,6 +198,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="App_Data\CrawlerData.mdf" />
+    <Content Include="App_Data\CrawlerData_log.ldf">
+      <DependentUpon>CrawlerData.mdf</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Lib\css\app.css" />
     <Content Include="Areas\Admin\Lib\img\avatars\avatar-2.jpg" />
     <Content Include="Areas\Admin\Lib\img\avatars\avatar-3.jpg" />
@@ -521,9 +524,7 @@
     <Content Include="Views\Shared\_Head.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -214,8 +214,6 @@
             objectToSend.SelectorThumbnail = thumbnailSelector;
             objectToSend.SelectorDescription = descriptionSelector;
             objectToSend.SelectorAuthor = authorSelector;
-           
-
             /*console.log(JSON.stringify(objectToSend));*/
             let resp = null;
             let xhr = new XMLHttpRequest();
@@ -225,6 +223,7 @@
                     resp = JSON.parse(xhr.responseText);
                     alert(resp.Id);
                     handleSaveListUrl(resp, links);
+                    window.location.reload();
                 }
             }
             xhr.open('POST', `Create`, true);
@@ -245,8 +244,7 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     resp = xhr.responseText;
-                    alert(resp);
-                  /*  window.location.reload();*/
+                    
                 }
             }
             // sua thanh duong dan luu link

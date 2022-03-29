@@ -17,21 +17,23 @@ namespace CrawlerDataProject.Data
         MyDbContext db = new MyDbContext();
         public async Task Execute(IJobExecutionContext context)
         {
-            var sources = from so in db.Sources.Where(s => s.Status == 0) select so;
-            foreach (var item in sources)
+            var links = from so in db.Links select so;
+            foreach (var item in links)
             {
                 if(item != null)
                 {
-                    //db.Sources.Add(GetLinks(item));
+                    Console.WriteLine(item.Url);
                     db.SaveChanges();
                     item.Status = 1;
                 }
             }
         }
-        public HashSet<string> GetLinks(Source source)
+        public List<Article> GetLinks(string url)
         {
+            List<Article> listArticle = new List<Article>(); 
             var web = new HtmlWeb();
-            HtmlDocument doc = web.Load(source.SelectorSource);
+            HtmlDocument doc = web.Load(url);
+            var source = new Source();
             var nodeList = doc.QuerySelectorAll(source.SelectorSource);
             HashSet<string> setLink = new HashSet<string>();
             foreach (var node in nodeList)
@@ -43,7 +45,8 @@ namespace CrawlerDataProject.Data
                 }
                 setLink.Add(link);
             }
-            return setLink;
+            return listArticle;
         }
+
     }
 }

@@ -91,11 +91,18 @@
   <ItemGroup>
     <Compile Include="ContentJob.cs" />
     <Compile Include="MyDbContext.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\CrawlerContent.exe.config" />
+    <None Include="bin\Debug\CrawlerDataProject.dll.config" />
+    <None Include="obj\Debug\CrawlerContent.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\CrawlerContent.csproj.CopyComplete" />
+    <None Include="obj\Debug\CrawlerContent.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +110,58 @@
       <Project>{ce170110-f582-41a0-afda-fcdd893a20ff}</Project>
       <Name>CrawlerDataProject</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Antlr3.Runtime.dll" />
+    <Content Include="bin\Debug\CrawlerContent.exe" />
+    <Content Include="bin\Debug\CrawlerContent.pdb" />
+    <Content Include="bin\Debug\CrawlerDataProject.dll" />
+    <Content Include="bin\Debug\CrawlerDataProject.pdb" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\HtmlAgilityPack.CssSelectors.dll" />
+    <Content Include="bin\Debug\HtmlAgilityPack.CssSelectors.pdb" />
+    <Content Include="bin\Debug\HtmlAgilityPack.dll" />
+    <Content Include="bin\Debug\HtmlAgilityPack.xml" />
+    <Content Include="bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <Content Include="bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml" />
+    <Content Include="bin\Debug\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\PagedList.dll" />
+    <Content Include="bin\Debug\Quartz.dll" />
+    <Content Include="bin\Debug\Quartz.xml" />
+    <Content Include="bin\Debug\RabbitMQ.Client.dll" />
+    <Content Include="bin\Debug\RabbitMQ.Client.xml" />
+    <Content Include="bin\Debug\System.Buffers.dll" />
+    <Content Include="bin\Debug\System.Buffers.xml" />
+    <Content Include="bin\Debug\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\Debug\System.Diagnostics.DiagnosticSource.xml" />
+    <Content Include="bin\Debug\System.Memory.dll" />
+    <Content Include="bin\Debug\System.Memory.xml" />
+    <Content Include="bin\Debug\System.Numerics.Vectors.dll" />
+    <Content Include="bin\Debug\System.Numerics.Vectors.xml" />
+    <Content Include="bin\Debug\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\Debug\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="bin\Debug\System.Threading.Channels.dll" />
+    <Content Include="bin\Debug\System.Threading.Channels.xml" />
+    <Content Include="bin\Debug\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\Debug\System.Threading.Tasks.Extensions.xml" />
+    <Content Include="bin\Debug\System.Web.Mvc.dll" />
+    <Content Include="bin\Debug\System.Web.Optimization.dll" />
+    <Content Include="bin\Debug\System.Web.Razor.dll" />
+    <Content Include="bin\Debug\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\Debug\System.Web.WebPages.dll" />
+    <Content Include="bin\Debug\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\Debug\WebGrease.dll" />
+    <Content Include="obj\Debug\CrawlerContent.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\CrawlerContent.exe" />
+    <Content Include="obj\Debug\CrawlerContent.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
