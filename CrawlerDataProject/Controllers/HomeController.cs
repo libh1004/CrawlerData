@@ -17,7 +17,7 @@ namespace CrawlerDataProject.Controllers
         public ViewResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             //Article article = db.Articles.Last();
-            //ViewBag.LastId = article.Id;
+            var Article = db.Articles.OrderByDescending(p => p.Id).FirstOrDefault();
             ViewBag.CurrentSort = sortOrder;
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
 
@@ -62,6 +62,7 @@ namespace CrawlerDataProject.Controllers
             {
                 return HttpNotFound();
             }
+            db.Articles.ToList();
             return View(article);
         }
 

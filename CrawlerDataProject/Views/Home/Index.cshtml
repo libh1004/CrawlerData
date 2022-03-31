@@ -11,7 +11,7 @@
 <section id="hero">
     <div class="container-xl">
         <div class="row gy-4">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Reverse().Take(1))
             {
                 <div class="col-lg-8">
                     <!-- featured post large -->
@@ -54,7 +54,7 @@
                                     <div class="thumb circle">
                                         <a href="/Home/Details/@item.Id">
                                             <div class="inner">
-                                                <img src="@item.Thumbnail" alt="post-title" style="height:60px"/>
+                                                <img src="@item.Thumbnail" alt="post-title" style="height:60px" />
                                             </div>
                                         </a>
                                     </div>
@@ -77,7 +77,7 @@
                                     <div class="thumb circle">
                                         <a href="/Home/Details/@item.Id">
                                             <div class="inner">
-                                                <img src="@item.Thumbnail" alt="post-title" />
+                                                <img src="@item.Thumbnail" alt="post-title" style="height:60px"/>
                                             </div>
                                         </a>
                                     </div>
