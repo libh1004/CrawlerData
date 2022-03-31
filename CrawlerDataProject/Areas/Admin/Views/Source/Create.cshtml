@@ -195,16 +195,6 @@
             let contentSelector = $('form[name="add-article-selector"] input[name="contentSelector"]').val();
             let authorSelector = $('form[name="add-article-selector"] input[name="authorSelector"]').val();
             let links = dataJsonLinks.links.map(val => ({ Url: val, Status: 0 }));
-            console.log(links);
-            //var objectToSend = {
-            //    Name: sourceName,
-            //    SelectorSource: sourceSelector,
-            //    SelectorTitle: titleSelector,
-            //    SelectorContent: contentSelector,
-            //    SelectorThumbnail: thumbnailSelector,
-            //    SelectorDescription: descriptionSelector,
-            //    SelectorAuthor: authorSelector
-            //}
             var objectToSend = new Object();
             objectToSend.Name = sourceName;
             objectToSend.SelectorSource = sourceSelector;
@@ -295,6 +285,10 @@
             }
             xhr.open('GET', `/Admin/Source/GetLinkDetailFromSourceLink?link=${link}&selector=${selector}`, false);
             xhr.send();
+        }
+        function crawlerURL(event) {
+            alert("hello");
+            
         }
     </script>
 }

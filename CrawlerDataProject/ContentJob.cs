@@ -37,8 +37,10 @@ namespace CrawlerDataProject
             var sourceId = db.Sources.FirstOrDefault(ar => ar.Id == source.Id);
             var titleNode = doc.QuerySelector(source.SelectorTitle);
             var title = titleNode.InnerText;
+            Debug.WriteLine("Title"+title.ToString());
             var contentNode = doc.QuerySelector(source.SelectorContent);
             var content = contentNode.InnerText;
+            Debug.WriteLine("content" + content.ToString());
             var descriptionNode = doc.QuerySelector(source.SelectorDescription);
             var description = descriptionNode.InnerText;
             HtmlNode checkNode = doc.DocumentNode.SelectSingleNode(source.SelectorThumbnail);
