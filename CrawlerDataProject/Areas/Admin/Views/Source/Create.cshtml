@@ -16,10 +16,10 @@
         @*<a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
                 Nhập các thông tin bên dưới
             </a>*@
-    </div>
+    </div>  
     <div class="mb-3">
-        <button class="btn btn-primary">Crawler URL</button>
-        <button class="btn btn-primary">Crawler Content</button>
+        <button class="btn btn-primary" onclick="crawlerURL()">Crawler URL</button>
+        <button class="btn btn-primary" onclick="crawlerContent()">Crawler Content</button>
     </div>
     <div class="row" id="step1">
         <div class="col-12 col-lg-12">
@@ -105,10 +105,10 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <div id="article-title"><h1></h1></div>
-                            <div id="article-description"><p></p></div>
+                            <div id="article-title"></div>
+                            <div id="article-description"></div>
                             <div id="article-thumbnail"></div>
-                            <div id="article-content"><p></p></div>
+                            <div id="article-content"></div>
                         </div>
                         <div class="form-group">
                             <input type="submit" name="btnSubmit" value="Lưu nguồn" class="btn btn-primary" />
@@ -196,16 +196,6 @@
             let contentSelector = $('form[name="add-article-selector"] input[name="contentSelector"]').val();
             let authorSelector = $('form[name="add-article-selector"] input[name="authorSelector"]').val();
             let links = dataJsonLinks.links.map(val => ({ Url: val, Status: 0 }));
-            console.log(links);
-            //var objectToSend = {
-            //    Name: sourceName,
-            //    SelectorSource: sourceSelector,
-            //    SelectorTitle: titleSelector,
-            //    SelectorContent: contentSelector,
-            //    SelectorThumbnail: thumbnailSelector,
-            //    SelectorDescription: descriptionSelector,
-            //    SelectorAuthor: authorSelector
-            //}
             var objectToSend = new Object();
             objectToSend.Name = sourceName;
             objectToSend.SelectorSource = sourceSelector;
@@ -296,6 +286,10 @@
             }
             xhr.open('GET', `/Admin/Source/GetLinkDetailFromSourceLink?link=${link}&selector=${selector}`, false);
             xhr.send();
+        }
+        function crawlerURL(event) {
+            alert("hello");
+            
         }
     </script>
 }

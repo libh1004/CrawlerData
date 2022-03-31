@@ -77,7 +77,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             {
                 db.Links.Add(link);
                 db.SaveChanges();
-                return View("Index");
             }
             return View("Index");
         }
@@ -115,14 +114,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> GetLinkDetailFromSourceLink(string link, string selector)
         {
-            //HttpClient client = new HttpClient();
-            //HttpResponseMessage response = await client.GetAsync(link);
-            //if (response.IsSuccessStatusCode) {
-            //    var content = response.Content.ReadAsStringAsync();
-            //    return Json(new { 
-            //        responseContent = content
-            //    }, JsonRequestBehavior.AllowGet);
-            //}
             var url = link;
             var web = new HtmlWeb();
             var doc = web.Load(url);

@@ -13,7 +13,7 @@ namespace CrawlerDataProject.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202203240327243_InitDatabase"; }
+            get { return "202203290628317_InitDatabase"; }
         }
         
         string IMigrationMetadata.Source

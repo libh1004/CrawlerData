@@ -20,12 +20,10 @@ namespace CrawlerDataProject.Data
             var links = from so in db.Links select so;
             foreach (var item in links)
             {
-                if(item != null)
-                {
-                    Console.WriteLine(item.Url);
-                    db.SaveChanges();
-                    item.Status = 1;
-                }
+                var listLink = GetLinks(item.Url);
+                //db.Links.Add(listLink);
+                db.SaveChanges();
+                item.Status = 1;
             }
         }
         public List<Article> GetLinks(string url)
