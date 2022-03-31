@@ -176,7 +176,6 @@ section {
             }
         }
         img {
-            height: 60px !important;
             @include transform(scale(1));
             @include transition(.3s);
         }
