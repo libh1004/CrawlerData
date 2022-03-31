@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<CrawlerDataProject.Models.Article>
+@model PagedList.IPagedList<CrawlerDataProject.Models.Article>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -9,14 +9,11 @@
 <!-- hero section -->
 
 <section id="hero">
-
     <div class="container-xl">
-
         <div class="row gy-4">
             @foreach (var item in Model)
             {
                 <div class="col-lg-8">
-
                     <!-- featured post large -->
                     <div class="post featured-post-lg">
                         <div class="details clearfix">

@@ -9,7 +9,7 @@ namespace CrawlerDataProject.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(CrawlerDataProject.Data.MyDbContext context)

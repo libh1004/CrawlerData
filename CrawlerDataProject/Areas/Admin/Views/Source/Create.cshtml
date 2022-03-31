@@ -13,13 +13,10 @@
 
     <div class="mb-3">
         <h1 class="h3 d-inline align-middle">Thêm mới nguồn trang</h1>
-        @*<a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
-                Nhập các thông tin bên dưới
-            </a>*@
     </div>
     <div class="mb-3">
-        <button class="btn btn-primary">Crawler URL</button>
-        <button class="btn btn-primary">Crawler Content</button>
+        <a href="C:\Users\LinhNT\Desktop\CrawlerData\CrawlerURL\bin\Debug\CrawlerURL.exe" class="btn btn-primary">Crawler URL</a>
+        <a href="#" class="btn btn-primary">Crawler Content</a>
     </div>
     <div class="row" id="step1">
         <div class="col-12 col-lg-12">
@@ -105,10 +102,11 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <div id="article-title"><h1></h1></div>
-                            <div id="article-description"><p></p></div>
-                            <div id="article-thumbnail"></div>
-                            <div id="article-content"><p></p></div>
+                            <div><h1 style="font-weight:700" id="article-title"></h1></div>
+                            <div><p id="article-description"></p></div>
+                            <div><img id="article-thumbnail"/></div>
+                            <div><p id="article-content"></p></div>
+                            <div><b id="article-author"></b></div>
                         </div>
                         <div class="form-group">
                             <input type="submit" name="btnSubmit" value="Lưu nguồn" class="btn btn-primary" />
@@ -179,6 +177,7 @@
                     $('#article-thumbnail').text(dataJson.thumbnail);
                     $('#article-description').text(dataJson.description);
                     $('#article-content').html(dataJson.content);
+                    $('#article-author').html(dataJson.content);
                     displayOnly('step4');
                 }
             }
@@ -196,16 +195,6 @@
             let contentSelector = $('form[name="add-article-selector"] input[name="contentSelector"]').val();
             let authorSelector = $('form[name="add-article-selector"] input[name="authorSelector"]').val();
             let links = dataJsonLinks.links.map(val => ({ Url: val, Status: 0 }));
-            console.log(links);
-            //var objectToSend = {
-            //    Name: sourceName,
-            //    SelectorSource: sourceSelector,
-            //    SelectorTitle: titleSelector,
-            //    SelectorContent: contentSelector,
-            //    SelectorThumbnail: thumbnailSelector,
-            //    SelectorDescription: descriptionSelector,
-            //    SelectorAuthor: authorSelector
-            //}
             var objectToSend = new Object();
             objectToSend.Name = sourceName;
             objectToSend.SelectorSource = sourceSelector;
@@ -214,8 +203,6 @@
             objectToSend.SelectorThumbnail = thumbnailSelector;
             objectToSend.SelectorDescription = descriptionSelector;
             objectToSend.SelectorAuthor = authorSelector;
-           
-
             /*console.log(JSON.stringify(objectToSend));*/
             let resp = null;
             let xhr = new XMLHttpRequest();
@@ -225,6 +212,7 @@
                     resp = JSON.parse(xhr.responseText);
                     alert(resp.Id);
                     handleSaveListUrl(resp, links);
+                    window.location.reload();
                 }
             }
             xhr.open('POST', `Create`, true);
@@ -245,8 +233,7 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     resp = xhr.responseText;
-                    alert(resp);
-                  /*  window.location.reload();*/
+                    
                 }
             }
             // sua thanh duong dan luu link
@@ -298,6 +285,10 @@
             }
             xhr.open('GET', `/Admin/Source/GetLinkDetailFromSourceLink?link=${link}&selector=${selector}`, false);
             xhr.send();
+        }
+        function crawlerURL(event) {
+            alert("hello");
+            
         }
     </script>
 }

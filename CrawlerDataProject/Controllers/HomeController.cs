@@ -13,10 +13,8 @@ namespace CrawlerDataProject.Controllers
     {
         MyDbContext db = new MyDbContext();
         [HttpGet]
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-
-            ViewBag.ListArticle = this.db.Articles.ToList();
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
@@ -29,11 +27,8 @@ namespace CrawlerDataProject.Controllers
             {
                 searchString = currentFilter;
             }
-
+            var articles = from a in db.Articles select a;
             ViewBag.CurrentFilter = searchString;
-
-            var articles = from a in db.Articles
-                           select a;
             if (!String.IsNullOrEmpty(searchString))
             {
                 articles = articles.Where(a => a.Author.Contains(searchString) || a.Content.Contains(searchString) || a.Description.Contains(searchString));

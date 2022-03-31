@@ -12,7 +12,7 @@
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
 
-@using (Html.BeginForm("Index", "Source", FormMethod.Get))
+@using (Html.BeginForm())
 {
     <p>
         Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
@@ -29,15 +29,6 @@
             Name
         </th>
         <th>
-            ListLink
-        </th>
-        <th>
-            CategoryId
-        </th>
-        <th>
-            LinksSelector
-        </th>
-        <th>
             SelectorTitle
         </th>
         <th>
@@ -49,6 +40,7 @@
         <th>
             SelectorAuthor
         </th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -62,12 +54,6 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ListLink)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.SelectorTitle)
             </td>
             <td>
@@ -79,11 +65,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SelectorAuthor)
             </td>
+            <td></td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+                <script>
+                     $(document).ready(function(){
+                      $("#submitButton").on("click",function()
+                      {
+                       alert('Do you want to delete this source');
+                      });
+                        });
+                 </script>
+             </td>
+                   
         </tr>
     }
 </table>
