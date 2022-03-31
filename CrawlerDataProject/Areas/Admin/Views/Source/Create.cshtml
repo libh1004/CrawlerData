@@ -13,13 +13,10 @@
 
     <div class="mb-3">
         <h1 class="h3 d-inline align-middle">Thêm mới nguồn trang</h1>
-        @*<a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
-                Nhập các thông tin bên dưới
-            </a>*@
-    </div>  
+    </div>
     <div class="mb-3">
-        <button class="btn btn-primary" onclick="crawlerURL()">Crawler URL</button>
-        <button class="btn btn-primary" onclick="crawlerContent()">Crawler Content</button>
+        <a href="C:\Users\LinhNT\Desktop\CrawlerData\CrawlerURL\bin\Debug\CrawlerURL.exe" class="btn btn-primary">Crawler URL</a>
+        <a href="#" class="btn btn-primary">Crawler Content</a>
     </div>
     <div class="row" id="step1">
         <div class="col-12 col-lg-12">
@@ -105,10 +102,11 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <div id="article-title"></div>
-                            <div id="article-description"></div>
-                            <div id="article-thumbnail"></div>
-                            <div id="article-content"></div>
+                            <div><h1 style="font-weight:700" id="article-title"></h1></div>
+                            <div><p id="article-description"></p></div>
+                            <div><img id="article-thumbnail"/></div>
+                            <div><p id="article-content"></p></div>
+                            <div><b id="article-author"></b></div>
                         </div>
                         <div class="form-group">
                             <input type="submit" name="btnSubmit" value="Lưu nguồn" class="btn btn-primary" />
@@ -179,6 +177,7 @@
                     $('#article-thumbnail').text(dataJson.thumbnail);
                     $('#article-description').text(dataJson.description);
                     $('#article-content').html(dataJson.content);
+                    $('#article-author').html(dataJson.content);
                     displayOnly('step4');
                 }
             }

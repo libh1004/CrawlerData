@@ -68,7 +68,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                 db.SaveChanges();
                 return Json(i);
             }
-            return View("Index");
+            return View(source);
         }
         [HttpPost]
         public ActionResult SaveUrl(List<Link> links)
