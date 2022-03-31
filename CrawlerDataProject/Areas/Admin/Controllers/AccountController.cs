@@ -67,15 +67,14 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Register()
         {
-           
             return View();
         }
         [HttpPost]
-        public ActionResult Create(AccountViewModel acc)
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(Account acc)
         {
             if (acc == null)
             {
@@ -83,18 +82,41 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                Account account = new Account()
-                {
-                    Fullname = acc.Fullname,
-                    Email = acc.Email,
-                    Password = acc.Password,
-                    Phone = acc.Phone
-                };
-                db.Accounts.Add(account);
+                db.Accounts.Add(acc);
                 db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View();
         }
+        //[HttpGet]
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Register(AccountViewModel acc)
+        //{
+        //    if (acc == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    if (ModelState.IsValid)
+        //    {
+        //        Account account = new Account()
+        //        {
+        //            Fullname = acc.Fullname,
+        //            Email = acc.Email,
+        //            Password = acc.Password,
+        //            Phone = acc.Phone,
+        //            Thumbnail = acc.Thumbnail
+        //        };
+        //        db.Accounts.Add(account);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View("Login");
+        //}
         [HttpGet]
         public ActionResult Details(int? id)
         {
@@ -164,19 +186,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             }
             return View("Index");
         }
-        public ActionResult Register(AccountViewModel accountViewModel)
-        {
-            var acc = new Account()
-            {
-                Fullname = accountViewModel.Fullname,
-                Password = accountViewModel.Password,
-                Email = accountViewModel.Email,
-                Phone = accountViewModel.Phone
-            };
-
-            db.SaveChanges();
-            return View(acc);
-        }
         [HttpPost]
         public ActionResult Login()
         {
@@ -205,10 +214,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
         {
             Session.Clear();
             return RedirectToAction("Login");
-        }
-        public ActionResult Profile()
-        {
-            return View();
         }
     }
 
