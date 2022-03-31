@@ -177,9 +177,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LinksJob.cs" />
-    <Compile Include="Migrations\202203240327243_InitDatabase.cs" />
-    <Compile Include="Migrations\202203240327243_InitDatabase.Designer.cs">
-      <DependentUpon>202203240327243_InitDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202203301035258_InitDatabase.cs" />
+    <Compile Include="Migrations\202203301035258_InitDatabase.Designer.cs">
+      <DependentUpon>202203301035258_InitDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203301048018_InitDatabase1.cs" />
+    <Compile Include="Migrations\202203301048018_InitDatabase1.Designer.cs">
+      <DependentUpon>202203301048018_InitDatabase1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203301512560_InitData.cs" />
+    <Compile Include="Migrations\202203301512560_InitData.Designer.cs">
+      <DependentUpon>202203301512560_InitData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -540,8 +548,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202203240327243_InitDatabase.resx">
-      <DependentUpon>202203240327243_InitDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202203301035258_InitDatabase.resx">
+      <DependentUpon>202203301035258_InitDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203301048018_InitDatabase1.resx">
+      <DependentUpon>202203301048018_InitDatabase1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203301512560_InitData.resx">
+      <DependentUpon>202203301512560_InitData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

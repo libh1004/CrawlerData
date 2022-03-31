@@ -7,13 +7,13 @@ namespace CrawlerDataProject.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitDatabase : IMigrationMetadata
+    public sealed partial class InitDatabase1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDatabase1));
         
         string IMigrationMetadata.Id
         {
-            get { return "202203240327243_InitDatabase"; }
+            get { return "202203301048018_InitDatabase1"; }
         }
         
         string IMigrationMetadata.Source
