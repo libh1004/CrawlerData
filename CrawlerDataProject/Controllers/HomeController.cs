@@ -1,4 +1,5 @@
 ﻿using CrawlerDataProject.Data;
+using CrawlerDataProject.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,8 @@ namespace CrawlerDataProject.Controllers
         [HttpGet]
         public ViewResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-
+            //Article article = db.Articles.Last();
+            var Article = db.Articles.OrderByDescending(p => p.Id).FirstOrDefault();
             ViewBag.CurrentSort = sortOrder;
             ViewBag.IdSortParm = sortOrder == "Id" ? "id_desc" : "Id";
 
@@ -60,7 +62,18 @@ namespace CrawlerDataProject.Controllers
             {
                 return HttpNotFound();
             }
+            db.Articles.ToList();
             return View(article);
+        }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
         }
     }
 }

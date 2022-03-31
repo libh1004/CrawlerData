@@ -10,8 +10,8 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Inspiration</a></li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/Home/">Inspiration</a></li>
                 <li class="breadcrumb-item active" aria-current="page">@Html.DisplayFor(model => model.Title)</li>
             </ol>
         </nav>
@@ -212,57 +212,27 @@
                             <img src="~/Content/images/wave.svg" class="wave" alt="wave" />
                         </div>
                         <div class="widget-content">
-                            <!-- post -->
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <span class="number">1</span>
-                                    <a href="blog-single.html">
-                                        <div class="inner">
-                                            <img src="@Html.DisplayFor(model => model.Thumbnail)" alt="post-title" />
-                                        </div>
-                                    </a>
+
+                            @foreach (var item in Model)
+                            {
+                                <!-- post -->
+                                <div class="post post-list-sm circle">
+                                    <div class="thumb circle">
+                                        <span class="number">1</span>
+                                        <a href="blog-single.html">
+                                            <div class="inner">
+                                                <img src="@Html.DisplayFor(model => model.Thumbnail)" alt="post-title" style="height: 60px" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="details clearfix">
+                                        <h6 class="post-title my-0"><a href="blog-single.html">@Html.DisplayFor(model => model.Title)</a></h6>
+                                        <ul class="meta list-inline mt-1 mb-0">
+                                            <li class="list-inline-item">29 March 2021</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0"><a href="blog-single.html">@Html.DisplayFor(model => model.Title)</a></h6>
-                                    <ul class="meta list-inline mt-1 mb-0">
-                                        <li class="list-inline-item">29 March 2021</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- post -->
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <span class="number">2</span>
-                                    <a href="blog-single.html">
-                                        <div class="inner">
-                                            <img src="~/Content/images/posts/tabs-2.jpg" alt="post-title" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0"><a href="blog-single.html">An Incredibly Easy Method That Works For All</a></h6>
-                                    <ul class="meta list-inline mt-1 mb-0">
-                                        <li class="list-inline-item">29 March 2021</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- post -->
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <span class="number">3</span>
-                                    <a href="blog-single.html">
-                                        <div class="inner">
-                                            <img src="~/Content/images/posts/tabs-3.jpg" alt="post-title" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0"><a href="blog-single.html">10 Ways To Immediately Start Selling Furniture</a></h6>
-                                    <ul class="meta list-inline mt-1 mb-0">
-                                        <li class="list-inline-item">29 March 2021</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </div>
 
