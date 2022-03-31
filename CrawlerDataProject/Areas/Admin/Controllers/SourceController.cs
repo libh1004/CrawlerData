@@ -7,7 +7,6 @@ using System.Net;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-using CrawlerDataProject.ViewModels;
 using System.Collections.Generic;
 using CrawlerDataProject.Models;
 
