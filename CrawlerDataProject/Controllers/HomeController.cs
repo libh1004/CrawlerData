@@ -69,5 +69,10 @@ namespace CrawlerDataProject.Controllers
         {
             return View();
         }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }
