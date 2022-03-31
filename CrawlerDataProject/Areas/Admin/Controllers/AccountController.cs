@@ -30,7 +30,6 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
             {
                 searchString = currentFilter;
             }
-
             ViewBag.CurrentFilter = searchString;
 
             var accounts = from p in db.Accounts
@@ -50,7 +49,7 @@ namespace CrawlerDataProject.Areas.Admin.Controllers
                     break;
             }
 
-            int pageSize = 1;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(accounts.ToPagedList(pageNumber, pageSize));
         }

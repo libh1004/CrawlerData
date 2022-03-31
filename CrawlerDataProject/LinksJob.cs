@@ -22,7 +22,14 @@ namespace CrawlerDataProject.Data
             var sources = db.Sources.Where(s => s.Status == 0);
             foreach(var source in sources)
             {
-                Console.WriteLine(source.ListLink);
+                var links = db.Links.Where(l => l.Source_Id == source.Id).Include(l => l.Source).ToList();
+                foreach(var url in links)
+                {
+                    //db.Links.Add(GetLinks(source, url.Url));
+                    url.Status = 1;
+                    db.Entry(url).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
             //foreach (var item in links)
             //{

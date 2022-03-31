@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Register", "Account", new { @class = "btn btn-primary"})
 </p>
 
 @using (Html.BeginForm("Index", "Account", FormMethod.Get))
@@ -24,9 +24,9 @@
         <th>
             <input type="checkbox" id="checkboxes"/>
         </th>
-        <th>
+        @*<th>
             @Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.IdSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
+        </th>*@
         <th>
             Full Name
         </th>
@@ -45,12 +45,12 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            @*<td>
                 <input type="checkbox" class="checkboxes" value="@item.Id"/>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Fullname)
             </td>
