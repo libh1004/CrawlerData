@@ -181,7 +181,6 @@
     <Compile Include="Migrations\202203240327243_InitDatabase.Designer.cs">
       <DependentUpon>202203240327243_InitDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\CategoryDBInitializer.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Article.cs" />
@@ -498,9 +497,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <None Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_Script.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <None Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_PreLoader.cshtml" />
+    <None Include="Views\Shared\_SearchPopup.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -523,7 +525,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

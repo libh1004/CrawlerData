@@ -49,7 +49,7 @@ namespace CrawlerDataProject.Controllers
                     break;
             }
 
-            int pageSize = 1;
+            int pageSize = 4;
             int pageNumber = (page ?? 1);
             return View(articles.ToPagedList(pageNumber, pageSize));
         }

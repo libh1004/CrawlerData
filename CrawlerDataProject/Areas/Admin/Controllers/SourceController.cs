@@ -5,12 +5,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using CrawlerURL;
-using CrawlerContent;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-using CrawlerDataProject.ViewModels;
 using System.Collections.Generic;
+using CrawlerDataProject.Models;
 
 namespace CrawlerDataProject.Areas.Admin.Controllers
 {
