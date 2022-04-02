@@ -38,8 +38,8 @@
                 <div class="post-tabs rounded bordered">
                     <!-- tab navs -->
                     <ul class="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
-                        <li class="nav-item" role="presentation"><button aria-controls="popular" aria-selected="true" class="nav-link active" data-bs-target="#popular" data-bs-toggle="tab" id="popular-tab" role="tab" type="button">Popular</button></li>
-                        <li class="nav-item" role="presentation"><button aria-controls="recent" aria-selected="false" class="nav-link" data-bs-target="#recent" data-bs-toggle="tab" id="recent-tab" role="tab" type="button">Recent</button></li>
+                        <li class="nav-item" role="presentation"><button aria-controls="popular" aria-selected="true" class="nav-link active" data-bs-target="#popular" data-bs-toggle="tab" id="popular-tab" role="tab" type="button">Latest news</button></li>
+                        <li class="nav-item" role="presentation"><button aria-controls="recent" aria-selected="false" class="nav-link" data-bs-target="#recent" data-bs-toggle="tab" id="recent-tab" role="tab" type="button">Old news</button></li>
                     </ul>
                     <!-- tab contents -->
                     <div class="tab-content" id="postsTabContent">
@@ -47,7 +47,7 @@
                         <div class="lds-dual-ring"></div>
                         <!-- popular posts -->
                         <div aria-labelledby="popular-tab" class="tab-pane fade show active" id="popular" role="tabpanel">
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.Reverse())
                             {
                                 <!-- post -->
                                 <div class="post post-list-sm circle">
@@ -183,14 +183,14 @@
                     </div>
 
                     <!-- widget popular posts -->
-                    <div class="widget rounded">
+                    <!--<div class="widget rounded">
                         <div class="widget-header text-center">
                             <h3 class="widget-title">Popular Posts</h3>
                             <img src="~/Content/images/wave.svg" class="wave" alt="wave" />
                         </div>
-                        <div class="widget-content">
+                        <div class="widget-content">-->
                             <!-- post -->
-                            <div class="post post-list-sm circle">
+                            <!--<div class="post post-list-sm circle">
                                 <div class="thumb circle">
                                     <span class="number">1</span>
                                     <a href="blog-single.html">
@@ -205,9 +205,9 @@
                                         <li class="list-inline-item">29 March 2021</li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- post -->
-                            <div class="post post-list-sm circle">
+                            <!--<div class="post post-list-sm circle">
                                 <div class="thumb circle">
                                     <span class="number">2</span>
                                     <a href="blog-single.html">
@@ -222,9 +222,9 @@
                                         <li class="list-inline-item">29 March 2021</li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- post -->
-                            <div class="post post-list-sm circle">
+                            <!--<div class="post post-list-sm circle">
                                 <div class="thumb circle">
                                     <span class="number">3</span>
                                     <a href="blog-single.html">
@@ -241,7 +241,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- widget categories -->
                     <div class="widget rounded">
